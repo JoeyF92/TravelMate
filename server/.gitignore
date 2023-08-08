@@ -1,1 +1,9 @@
 .env
+DS_Store
+coverage
+node_modules
+.flaskenv
+Pipfile.lock
+.pytest_cache
+.coverage
+__pycache__
