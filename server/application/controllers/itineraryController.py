@@ -15,7 +15,8 @@ def generate_itinerary_with_chatgpt(user_input):
 def call_chatgpt_api(system_message, user_message):
     headers = {
         'Content-Type': 'application/json',
-        'Authorization': f'Bearer {OPENAI_API_KEY}'
+        'Authorization': f'Bearer {OPENAI_API_KEY}',
+        'OpenAI-Organization': 'org-eUcRyyF7rRbARIgCJEOMFube'
     }
     data = {
         'messages': [
