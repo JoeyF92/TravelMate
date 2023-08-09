@@ -2,23 +2,17 @@ from flask import Flask
 from flask_cors import CORS
 from flask_sqlalchemy import SQLAlchemy
 from dotenv import load_dotenv
-load_dotenv()
 import os
 import bcrypt
 
-
-
+load_dotenv()
 
 app = Flask(__name__)
 CORS(app)
-
-app.config["SQLALCHEMY_DATABASE_URI"] = os.environ.get("DB_URL")
-print("Database URI:", os.environ.get("DB_URL"))
+app.config["SQLALCHEMY_DATABASE_URI"] = os.getenv("DB_URL")
 app.config['OPENAI_API_KEY'] = os.environ.get("OPENAI_API_KEY")
 
-
 db = SQLAlchemy(app)
-
 
 from application.routes import *
 app.register_blueprint(user_routes, url_prefix="/user")
