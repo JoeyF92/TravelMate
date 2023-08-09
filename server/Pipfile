@@ -10,11 +10,14 @@ flask-cors = "*"
 flask-sqlalchemy = "*"
 gunicorn = "*"
 psycopg2-binary = "*"
+openai = "*"
+bcrypt = "*"
+flask-bcrypt = "*"
 
 [dev-packages]
 
 [requires]
-python_version = "3.9"
+python_version = "3.11"
 
 [scripts]
 dev="flask run"
