@@ -11,11 +11,11 @@ def create_database():
         db.create_all()
 
 
-def add_entries():
+#def add_entries():
     #add testing data here
 
 
 if __name__ == "__main__":
     delete_database()
     create_database()
-    add_entries()
+    #add_entries()

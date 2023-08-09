@@ -10,6 +10,9 @@ flask-cors = "*"
 flask-sqlalchemy = "*"
 gunicorn = "*"
 psycopg2-binary = "*"
+openai = "*"
+bcrypt = "*"
+flask-bcrypt = "*"
 
 [dev-packages]
 
