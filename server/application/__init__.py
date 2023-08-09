@@ -4,6 +4,9 @@ from flask_sqlalchemy import SQLAlchemy
 from dotenv import load_dotenv
 load_dotenv()
 import os
+import bcrypt
+
+
 
 
 app = Flask(__name__)
@@ -16,8 +19,9 @@ app.config['OPENAI_API_KEY'] = os.environ.get("OPENAI_API_KEY")
 
 db = SQLAlchemy(app)
 
+
 from application.routes import *
-# app.register_blueprint(user_routes, url_prefix="/user")
+app.register_blueprint(user_routes, url_prefix="/user")
 # app.register_blueprint(album_routes, url_prefix="/album")
 # app.register_blueprint(bucket_routes, url_prefix="/bucket")
 # app.register_blueprint(content_routes, url_prefix="/content")

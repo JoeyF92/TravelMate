@@ -1,4 +1,4 @@
-from application import db, app
+from application import db, app, bcrypt
 from datetime import datetime
 
 app.app_context().push()
@@ -24,6 +24,9 @@ class User(db.Model):
         self.email = email
         self.username = username
         self.password = password
+
+    
+
 
 class Token(db.Model):
     __tablename__ = "token"
