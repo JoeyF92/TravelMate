@@ -99,14 +99,12 @@ class Content(db.Model):
     content_id = db.Column(db.Integer, primary_key=True)
     photo = db.Column(db.Integer, nullable=False)
     description = db.Column(db.String, nullable=False)
-    is_private = db.Column(db.Boolean, nullable=False)
     tags = db.Column(db.String, nullable=False)
     album_id = db.Column(db.Integer, db.ForeignKey("album.album_id"))
 
     def __init__(self, photo, description, is_private, tags, album_id):
         self.photo = photo
         self.description = description
-        self.is_private = is_private
         self.tags = tags
         self.album_id = album_id
 

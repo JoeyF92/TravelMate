@@ -25,28 +25,30 @@ def create(id):
     return jsonify({"Message": "Successfully added a new album"}), 201
 
 def index_albums_by_user(id):
-    album = Album.query.filter_by(user_id = id).first().__dict__
-    album.pop("_sa_instance_state", None)
-    return album
+    albums = Album.query.filter_by(user_id = id).all()
+    data = [d.__dict__ for d in albums]
+    for item in data:
+        item.pop("_sa_instance_state", None)
+    return data, 200
 
 def index_album_by_id(id):
     album = Album.query.filter_by(album_id = id).first().__dict__
     album.pop("_sa_instance_state", None)
-    return album
+    return album, 200
 
-def update_album_by_id(id):
+def update_album(id):
     data = request.get_json()
     album = db.session.get(Album, id)
-    album.title = data.title
-    album.location = data.location
-    album.description = data.description
-    album.members = data.members
-    album.date = data.date
+    album.title = data.title or album.title
+    album.location = data.location or album.location
+    album.description = data.description or album.description
+    album.members = data.members or album.members
+    album.date = data.date or album.date
     db.session.commit()
-    return jsonify({'message': 'Album details updated!'})
+    return jsonify({'message': 'Album details updated!'}), 200
 
-def destroy_by_id(id):
+def destroy_album(id):
     album = db.session.get(Album, id)
     db.session.delete(album)
     db.session.commit()
-    return jsonify({'message': 'Album deleted!'})
+    return jsonify({'message': 'Album deleted!'}), 204

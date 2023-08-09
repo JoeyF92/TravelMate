@@ -27,9 +27,9 @@ def get_album_by_id(album_id):
 #update an album by album id
 @album_routes.route("/update/<int:album_id>", methods=["PUT"])
 def update_album_by_id(album_id):
-    return update_album_by_id(album_id)
+    return update_album(album_id)
 
 #delete an album by album id
 @album_routes.route("/<int:album_id>", methods=["DELETE"])
 def destroy_album_by_id(album_id):
-    return destroy_by_id(album_id)
+    return destroy_album(album_id)
