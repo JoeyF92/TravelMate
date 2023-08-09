@@ -25,9 +25,6 @@ class User(db.Model):
         self.username = username
         self.password = password
 
-    
-
-
 class Token(db.Model):
     __tablename__ = "token"
     token_id = db.Column(db.Integer, primary_key=True)
@@ -83,18 +80,22 @@ class Album(db.Model):
     location = db.Column(db.String, nullable=False)
     description = db.Column(db.String, nullable=False)
     members = db.Column(db.String, nullable=False)
-    date = db.Column(db.DateTime, nullable=False)
+    start_date = db.Column(db.DateTime, nullable=False)
+    end_date = db.Column(db.DateTime, nullable=False)
+    share_code = db.Column(db.Integer, nullable=False)
     user_id = db.Column(db.Integer, db.ForeignKey("user.user_id"))
     
     content = db.relationship('Content', backref='album')
     itinerary = db.relationship('Itinerary', backref='album')
 
-    def __init__(self, title, location, description, members, date, user_id):
+    def __init__(self, title, location, description, members, start_date, end_date, share_code, user_id):
         self.title = title
         self.location = location
         self.description = description
         self.members = members
-        self.date = date
+        self.start_date = start_date
+        self.end_date = end_date
+        self.share_code = share_code
         self.user_id = user_id
 
 class Content(db.Model):
