@@ -1,2 +1,2 @@
-export { default as Navbar } from "./Navbar";
+export { default as NavigationBar } from "./NavigationBar";
 export {default as AuthModal} from "./AuthModal";

@@ -1,0 +1,42 @@
+.navbar {
+    background-color: #e6e1c9;
+}
+
+.brand {
+    font-size: 35px;
+    color: #4682A9;
+    margin-top: 20px;
+    font-family: 'Poppins', sans-serif;
+    font-weight: 600;
+}
+
+.linkStyle {
+    font-size: 22px;
+    color: #4682A9;
+    font-family: 'Poppins', sans-serif;
+    margin-left: 30px;
+    text-decoration: none;
+    transition: all 0.2s;
+}
+
+.linkStyle:hover {
+    color: #4682A9;
+    opacity: 0.5;
+}
+
+.navbar-nav > .linkStyle.active {
+    color: #4682A9;
+    font-weight: 700;
+    pointer-events: none;
+}
+
+.navbar img {
+    width: 70px;
+    margin: 0 auto;
+}
+
+.icon {
+    color: #4682A9;
+    background-color: #4682A9;
+}
+  
