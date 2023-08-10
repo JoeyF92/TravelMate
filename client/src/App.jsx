@@ -2,6 +2,7 @@ import "./App.css";
 import { Routes, Route } from "react-router-dom";
 import {
   Landing,
+  ItineraryGenerator,
   Homepage,
   GroupsPage,
   GroupPage,
@@ -18,7 +19,8 @@ function App() {
     <>
     <AuthProvider>
       <Routes>
-        <Route path="/welcome" element={<Landing />} />
+        <Route path="/welcome" element={<Landing />}/>
+      <Route path="/itinerary" element={<ItineraryGenerator/>} />
           <Route path="/" element={<ProtectedRoute redirectTo="/welcome" />}>
             <Route path="/" element={<NavigationBar />}>
               <Route index element={<Homepage />} />
