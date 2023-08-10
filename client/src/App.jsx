@@ -22,9 +22,9 @@ function App() {
           <Route path="/" element={<ProtectedRoute redirectTo="/welcome" />}>
             <Route path="/" element={<NavigationBar />}>
               <Route index element={<Homepage />} />
-              <Route path="/gallery">
-                <Route index element={<Gallery />} />
-                <Route path=":id" element={<Album />} />
+              <Route path="/groups">
+                <Route index element={<GroupsPage />} />
+                <Route path=":id" element={<GroupPage />} />
               </Route>
               <Route path="/bucket-list" element={<BucketList />} />
               <Route path="/packing-list" element={<PackingList />} />
@@ -33,9 +33,8 @@ function App() {
           </Route>
       </Routes>
     </AuthProvider>
-   
     </>
-  )
+  );
 }
 
-export default App
+export default App;
