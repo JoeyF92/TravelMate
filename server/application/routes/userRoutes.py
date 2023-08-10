@@ -6,6 +6,7 @@ user_routes = Blueprint("user_routes", __name__)
 
 @user_routes.route('/register', methods=['POST'])
 def create_user_route():
+    print("Reached the registration route")
     return register()
 
 @user_routes.route('/<int:user_id>', methods=['GET'])

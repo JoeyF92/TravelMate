@@ -1,8 +1,10 @@
 from application import db, app, bcrypt
 from application.models import User, Token
-from flask import request, jsonify, render_template, redirect, url_for
+from flask import Flask, request, jsonify, render_template, redirect, url_for
+import jwt
 import os
 from uuid import uuid4
+
 
 #  @app.route("/register", methods=["POST"])
 def register():
@@ -90,7 +92,6 @@ def login():
     user = User.query.filter_by(username=username).first()
 
     check_password =bcrypt.checkpw(password.encode('utf-8'), user.password.encode('utf-8'))
-    print(check_password)
 
     if not user or not check_password:
         return jsonify({'message': 'Invalid username or password'}), 401 
@@ -98,8 +99,7 @@ def login():
     new_token = create_token(data.get('user_id'))
     
     print(new_token)
-
-    return jsonify({'message': 'Login successful'}), 200
+    return jsonify({'message': 'Login successful', 'token': new_token.token, 'username': user.username, 'first_name': user.first_name, 'last_name': user.last_name}), 200
 
 def create_token(id):
     token = uuid4()
