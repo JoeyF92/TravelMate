@@ -20,7 +20,7 @@ export default function NavigationBar() {
         <Navbar.Collapse id="responsive-navbar-nav">
           <Nav className="ml-auto" activeKey={location.pathname}>
             <NavLink to="/" className="linkStyle">Home</NavLink>
-            <NavLink to="/gallery" className="linkStyle">Gallery</NavLink>
+            <NavLink to="/groups" className="linkStyle">Gallery</NavLink>
             <NavLink to="/bucket-list" className="linkStyle">Bucket List</NavLink>
             <NavLink to="/packing-list" className="linkStyle">Packing List</NavLink>
             <NavLink to="/profile" className="linkStyle">Profile</NavLink>

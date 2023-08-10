@@ -3,8 +3,8 @@ import { Routes, Route } from "react-router-dom";
 import {
   Landing,
   Homepage,
-  Gallery,
-  Album,
+  GroupsPage,
+  GroupPage,
   BucketList,
   PackingList,
   Profile,
