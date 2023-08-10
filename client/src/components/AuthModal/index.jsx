@@ -5,8 +5,7 @@ import { faPlane } from '@fortawesome/free-solid-svg-icons';
 import axios from "axios";
 import { useAuth } from '../../contexts';
 import { useNavigate } from "react-router-dom";
-
-const baseUrl = "http://127.0.0.1:5000"
+import config from '../../config';
 
 export default function AuthModal({ buttonLabel, showPlaneIcon }) {
     const { user, setUser } = useAuth();
@@ -54,7 +53,7 @@ export default function AuthModal({ buttonLabel, showPlaneIcon }) {
 
       try {
         if (isLogin) {
-          const response = await axios.post(`${baseUrl}/user/login`, {
+          const response = await axios.post(`${config.baseUrl}/user/login`, {
             username: loginForm.username,
             password: loginForm.password,
           });
@@ -66,12 +65,12 @@ export default function AuthModal({ buttonLabel, showPlaneIcon }) {
           });
 
           if (response.status === 200) {
-            localStorage.setItem('username', response.data.username);
+            localStorage.setItem('user_id', response.data.user_id);
             localStorage.setItem('token', response.data.token);
             navigate('/');
           }
         } else {
-          const response = await axios.post(`${baseUrl}/user/register`, {
+          const response = await axios.post(`${config.baseUrl}/user/register`, {
             first_name: registrationForm.firstName,
             last_name: registrationForm.lastName,
             email: registrationForm.email,
