@@ -2,7 +2,7 @@ from application import db, app
 from application.models import Album
 from flask import request, jsonify, render_template, redirect, url_for
 from random import randint
-from contentController import destroy_content_by_album
+from .contentController import destroy_content_by_album
 
 def index_album():
     albums = Album.query.all()
@@ -23,8 +23,7 @@ def create(id):
     user_id = id
     if not title or not location:
         return jsonify({"error": "Missing parameters"}), 400
-    album = Album(title = title, location = location, description = description, members = members, date = date, share_code = share_code,
-    user_id = user_id)
+    album = Album(title = title, location = location, description = description, members = members, start_date = start_date, end_date = end_date, share_code = share_code, user_id = user_id)
     db.session.add(album)
     db.session.commit()
     return jsonify({"Message": "Successfully added a new album"}), 201
