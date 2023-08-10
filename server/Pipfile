@@ -5,7 +5,6 @@ name = "pypi"
 
 [packages]
 flask = "*"
-python-dotenv = "*"
 flask-cors = "*"
 flask-sqlalchemy = "*"
 gunicorn = "*"
@@ -13,6 +12,8 @@ psycopg2-binary = "*"
 openai = "*"
 bcrypt = "*"
 flask-bcrypt = "*"
+python-dotenv = "*"
+pyjwt = "*"
 
 [dev-packages]
 

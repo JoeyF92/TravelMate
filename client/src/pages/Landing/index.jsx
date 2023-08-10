@@ -18,7 +18,7 @@ export default function Landing() {
             </div>
 
             <div className="image-container">
-                <img src={image} alt="Travel mate logo" />
+                <img src={image} alt="Travel Mate logo" />
             </div>
         </div>
       </div>
