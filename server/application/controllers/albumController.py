@@ -5,6 +5,7 @@ from random import randint
 from .contentController import destroy_content_by_album
 
 def index_album():
+    #   return "<p>Hi!<p>"
     albums = Album.query.all()
     data = [d.__dict__ for d in albums]
     for item in data:
