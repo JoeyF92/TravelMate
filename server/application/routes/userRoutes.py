@@ -14,7 +14,6 @@ def get_user_route(user_id):
      user = get_user_by_id(user_id)
      return user
    
-
 @user_routes.route('/users', methods=['GET'])
 def get_all_users_route():
     users=get_all_users()
@@ -23,7 +22,6 @@ def get_all_users_route():
 @user_routes.route('/<int:user_id>', methods=['PATCH'])
 def update_user_route(user_id):
     return update_user(user_id)
-
 
 @user_routes.route('/<string:username>', methods=['GET'])
 def get_by_username_route(username):

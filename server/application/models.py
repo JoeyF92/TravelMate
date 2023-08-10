@@ -79,7 +79,7 @@ class Album(db.Model):
     title = db.Column(db.String, nullable=False)
     location = db.Column(db.String, nullable=False)
     description = db.Column(db.String, nullable=False)
-    members = db.Column(db.String, nullable=False)
+    members = db.Column(db.String)
     start_date = db.Column(db.DateTime, nullable=False)
     end_date = db.Column(db.DateTime, nullable=False)
     share_code = db.Column(db.Integer, nullable=False)
