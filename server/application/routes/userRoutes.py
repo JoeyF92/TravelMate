@@ -32,3 +32,7 @@ def get_by_username_route(username):
 @user_routes.route('/login', methods=['POST'])
 def login_route():
     return login()
+
+@user_routes.route('/logout', methods=['POST'])
+def logout_route():
+    return logout()

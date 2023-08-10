@@ -12,13 +12,15 @@ psycopg2-binary = "*"
 openai = "*"
 bcrypt = "*"
 flask-bcrypt = "*"
-python-dotenv = "*"
+uuid = "*"
 pyjwt = "*"
 
 [dev-packages]
+pytest = "*"
 
 [requires]
 python_version = "3.11"
 
 [scripts]
 dev="flask run"
+test="pytest"
