@@ -13,6 +13,7 @@ openai = "*"
 bcrypt = "*"
 flask-bcrypt = "*"
 uuid = "*"
+pyjwt = "*"
 
 [dev-packages]
 pytest = "*"

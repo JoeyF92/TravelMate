@@ -1,9 +1,9 @@
 from application import db, app, bcrypt
 from application.models import User, Token
-from flask import Flask, request, jsonify, render_template, redirect, url_for
-import os
+from flask import request, jsonify, render_template, redirect, url_for
+import os 
+import jwt
 from uuid import uuid4
-
 
 #  @app.route("/register", methods=["POST"])
 def register():
@@ -77,37 +77,38 @@ def get_by_username(username):
         'last_name': user.last_name,
         'email': user.email,
         'username': user.username,
-        'password': user.password
+        'password':user.password
     }
 
     return jsonify(user_data), 200
 
 def login():
     data = request.json
-    print(data)
 
     username = data.get('username')
     password = data.get('password')
 
     user = User.query.filter_by(username=username).first()
 
-    check_password = bcrypt.checkpw(password.encode('utf-8'), user.password.encode('utf-8'))
+    check_password =bcrypt.checkpw(password.encode('utf-8'), user.password.encode('utf-8'))
+    print(check_password)
 
     if not user or not check_password:
         return jsonify({'message': 'Invalid username or password'}), 401 
-    
     new_token = create_token(user.user_id)
     
-    return jsonify({
-        'message': 'Login successful',
-        'token': new_token.token,
-        'username': user.username,
-        'first_name': user.first_name,
-        'last_name': user.last_name
-    }), 200
+    # token_payload = {'user_id': user.user_id}
+    # secret_key = os.environ["SECRET_KEY"]
+    # token = jwt.encode(token_payload, secret_key, algorithm='HS256')
+    # # Store the token in the database
+    # new_token = Token(token=token, user_id=user.user_id)
+    # db.session.add(new_token)
+    # db.session.commit()
+    return jsonify({'message': 'Login successful', 'token': new_token.token, 'username': user.username, 'first_name': user.first_name, 'last_name': user.last_name}), 200
+
 
 def create_token(id):
-    token = str(uuid4())  # Convert UUID to string
+    token = uuid4()
     if not id or not token:
         return jsonify({'message': 'Missing parameters'})
     newToken = Token(user_id=id, token=token)
@@ -115,13 +116,26 @@ def create_token(id):
     db.session.commit()
     return newToken
 
+# def logout():
+#     data = request.json
+#     token = data.get('token')
+
+#     if not token:
+#         return jsonify({'message': 'Token missing in request'}), 400
+
+#     token_record = Token.query.filter_by(token=token).first()
+
+#     if not token_record:
+#         return jsonify({'message': 'Token not found'}), 404
+
+#     db.session.delete(token_record)
+#     db.session.commit()
+
 def logout():
     data = request.json
     token_value = data.get('token')
-   
 
     token = Token.query.filter_by(token=token_value).first()
-    print(token)
 
     if token:
         db.session.delete(token)
@@ -133,6 +147,9 @@ def logout():
         return jsonify(token_data), 200
     else:
         return jsonify({'message': 'Token not found'}), 404
+
+
+
 
     
 
