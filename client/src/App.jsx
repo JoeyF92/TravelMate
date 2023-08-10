@@ -8,6 +8,7 @@ function App() {
       <Routes>
         <Route path="/" element={<Pages.Landing />} />
         <Route path="/groups" element={<Pages.GroupsPage />} />
+        <Route path="/group/:id" element={<Pages.GroupPage />} />
       </Routes>
     </>
   );
