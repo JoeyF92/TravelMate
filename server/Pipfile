@@ -12,12 +12,7 @@ psycopg2-binary = "*"
 openai = "*"
 bcrypt = "*"
 flask-bcrypt = "*"
-<<<<<<< HEAD
 uuid = "*"
-=======
-python-dotenv = "*"
-pyjwt = "*"
->>>>>>> 0ddca4a9a27fca57145cddfcb761f8845ce1fed9
 
 [dev-packages]
 pytest = "*"

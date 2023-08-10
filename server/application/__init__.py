@@ -10,7 +10,6 @@ load_dotenv()
 app = Flask(__name__)
 CORS(app)
 app.config["SQLALCHEMY_DATABASE_URI"] = os.environ.get("DB_URL")
-app.config['SECRET_KEY'] = os.environ["SECRET_KEY"]
 app.config['OPENAI_API_KEY'] = os.environ.get("OPENAI_API_KEY")
 
 db = SQLAlchemy(app)

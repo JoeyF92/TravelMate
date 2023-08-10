@@ -1,7 +1,6 @@
 from application import db, app, bcrypt
 from application.models import User, Token
 from flask import Flask, request, jsonify, render_template, redirect, url_for
-import jwt
 import os
 from uuid import uuid4
 
@@ -78,31 +77,37 @@ def get_by_username(username):
         'last_name': user.last_name,
         'email': user.email,
         'username': user.username,
-        'password':user.password
+        'password': user.password
     }
 
     return jsonify(user_data), 200
 
 def login():
     data = request.json
+    print(data)
 
     username = data.get('username')
     password = data.get('password')
 
     user = User.query.filter_by(username=username).first()
 
-    check_password =bcrypt.checkpw(password.encode('utf-8'), user.password.encode('utf-8'))
+    check_password = bcrypt.checkpw(password.encode('utf-8'), user.password.encode('utf-8'))
 
     if not user or not check_password:
         return jsonify({'message': 'Invalid username or password'}), 401 
     
-    new_token = create_token(data.get('user_id'))
+    new_token = create_token(user.user_id)
     
-    print(new_token)
-    return jsonify({'message': 'Login successful', 'token': new_token.token, 'username': user.username, 'first_name': user.first_name, 'last_name': user.last_name}), 200
+    return jsonify({
+        'message': 'Login successful',
+        'token': new_token.token,
+        'username': user.username,
+        'first_name': user.first_name,
+        'last_name': user.last_name
+    }), 200
 
 def create_token(id):
-    token = uuid4()
+    token = str(uuid4())  # Convert UUID to string
     if not id or not token:
         return jsonify({'message': 'Missing parameters'})
     newToken = Token(user_id=id, token=token)
@@ -110,10 +115,24 @@ def create_token(id):
     db.session.commit()
     return newToken
 
+def logout():
+    data = request.json
+    token_value = data.get('token')
+   
 
+    token = Token.query.filter_by(token=token_value).first()
+    print(token)
 
+    if token:
+        db.session.delete(token)
+        db.session.commit()
 
+        token_data = token.__dict__.copy()
+        token_data.pop('_sa_instance_state', None)
 
+        return jsonify(token_data), 200
+    else:
+        return jsonify({'message': 'Token not found'}), 404
 
     
 
