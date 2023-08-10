@@ -1,6 +1,4 @@
-.navbar {
-    background-color: #e6e1c9;
-}
+
 
 .brand {
     font-size: 35px;
@@ -8,6 +6,11 @@
     margin-top: 20px;
     font-family: 'Poppins', sans-serif;
     font-weight: 600;
+    text-decoration: none;
+}
+
+.brand-link {
+    text-decoration: none;
 }
 
 .linkStyle {
