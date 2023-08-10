@@ -33,6 +33,6 @@ def get_by_username_route(username):
 def login_route():
     return login()
 
-@user_routes.route('/logout', methods=['POST'])
+@user_routes.route('/logout', methods=['DELETE'])
 def logout_route():
     return logout()
