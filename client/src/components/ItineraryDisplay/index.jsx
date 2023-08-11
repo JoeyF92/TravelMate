@@ -3,9 +3,10 @@ import image from '../../assets/Logo-globe.png';
 import { useState } from 'react';
 import Modal from 'react-bootstrap/Modal';
 
-function ItineraryDisplay({ isLoading, itinerary, setItinerary, showItinerary, setShowItinerary }) {
+function ItineraryDisplay({ isLoading, itinerary, setItinerary, showItinerary, setShowItinerary, location }) {
     const [newActivity, setNewActivity] = useState('');
     const [addingActivityForDay, setAddingActivityForDay] = useState(null);
+    const [generatingActivityForDay, setGeneratingActivityForDay] = useState({});
 
     const handleClose = () => setShowItinerary(false);
 
@@ -69,26 +70,105 @@ function ItineraryDisplay({ isLoading, itinerary, setItinerary, showItinerary, s
         setAddingActivityForDay(null);
     }
 
-    const handleSaveItinerary = async () => {
-        console.log(itinerary)
-        console.log(JSON.parse(itinerary))
-        const album_id = 1 //placeholder, need dynamic album_id
-        const response = await fetch('http://127.0.0.1:5000/itinerary/save_itinerary', {
-            method: 'POST',
-            headers: {
-              'Content-Type': 'application/json',
-            },
-            body: JSON.stringify({ album_id: album_id, itinerary: itinerary }),
-          });
+    const handleGenerateActivity = async (day) => {
+        try {
+            setGeneratingActivityForDay((prev) => ({ ...prev, [day]: true }));
 
-          if (response.ok) {
-            const data = await response.json();
-            alert('Itinerary saved successfully!')
-          } else {
-            console.error('Error saving itinerary');
-          }
-       
+            const prompt = `Hello, I am a software designed to assist in planning vacations based on user input. To help create an itinerary, I got you to suggest an itinerary for a trip to ${location} based on these parameters: location, dates, budget, occasion, and user hobbies/interests. This is the response you gave: ${itinerary}. This prompt I'm sending to you now is sent when a user selects the 'generate new activity' button. I would like you to come up with a new activity suggestion that is completely unique to any of the ones you gave in your previous response, it is crucial that it is different to any of the ones in the itinerary already. Please write the activity in the same style as the items in the description list with an estimated price for the activity, and respond in json format with a 'generated_activity' key like this: {"generated_activity": "Discover the vibrant street art scene in (location) by taking a self-guided tour or joining a guided street art walking tour. Free or £10 for a guided tour."}  Keep your responses concise, focusing solely on the generated_activity.`
+
+            const response = await fetch('http://127.0.0.1:5000/itinerary/generate_itinerary', {
+                method: 'POST' , 
+                headers: {
+                    'Content-Type': 'application/json',
+                  },
+                  body: JSON.stringify({ user_input: prompt }),
+            })
+
+            if(response.ok){
+                const data = await response.json();
+                const itineraryJSON = JSON.parse(data.itinerary)
+                const generatedActivity = itineraryJSON.generated_activity
+                const parsedItinerary = JSON.parse(itinerary);
+                const selectedDay = parsedItinerary[day]
+
+                if(!selectedDay) return;
+
+                const updatedItinerary = {
+                    ...parsedItinerary,
+                    [day]: {
+                        ...selectedDay,
+                        description: [...selectedDay.description, generatedActivity]
+                    }
+                }
+
+                setItinerary(JSON.stringify(updatedItinerary))
+                setGeneratingActivityForDay((prev) => ({ ...prev, [day]: false }));
+            } else {
+                console.error('Error generating activity')
+                setGeneratingActivityForDay((prev) => ({ ...prev, [day]: false }));
+            }
+
+        } catch (error) {
+            console.error('Error', error)
+            setGeneratingActivityForDay((prev) => ({ ...prev, [day]: false }));
+
+        }
     }
+
+    const handleSaveItinerary = async () => {
+        const album_id = 1; // Placeholder, need dynamic album_id
+    
+        try {
+            // Check itinerary exists before attempting to delete
+            const checkResponse = await fetch(`http://127.0.0.1:5000/itinerary/${album_id}`);
+            
+            if (checkResponse.status === 404) {
+                // save the new itinerary directly
+                const saveResponse = await fetch('http://127.0.0.1:5000/itinerary/save_itinerary', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify({ album_id: album_id, itinerary: itinerary }),
+                });
+    
+                if (saveResponse.ok) {
+                    alert('Itinerary saved successfully!');
+                } else {
+                    console.error('Error saving itinerary');
+                }
+            } else if (checkResponse.ok) {
+                // Delete existing itinerary if exists
+                const deleteResponse = await fetch(`http://127.0.0.1:5000/itinerary/delete_itinerary/${album_id}`, {
+                    method: 'DELETE'
+                });
+    
+                if (deleteResponse.ok) {
+                    // Save the new itinerary
+                    const saveResponse = await fetch('http://127.0.0.1:5000/itinerary/save_itinerary', {
+                        method: 'POST',
+                        headers: {
+                            'Content-Type': 'application/json',
+                        },
+                        body: JSON.stringify({ album_id: album_id, itinerary: itinerary }),
+                    });
+    
+                    if (saveResponse.ok) {
+                        alert('Itinerary saved successfully!');
+                    } else {
+                        console.error('Error saving itinerary');
+                    }
+                } else {
+                    console.error('Error deleting itinerary');
+                }
+            } else {
+                console.error('Error checking itinerary');
+            }
+        } catch (error) {
+            console.error('Error:', error);
+        }
+    };
+    
 
     const handleDeleteItinerary = async () => {
         const album_id = 1 //need dynamic album id
@@ -97,7 +177,6 @@ function ItineraryDisplay({ isLoading, itinerary, setItinerary, showItinerary, s
         })
 
         if (response.ok) {
-            console.log(response)
             setShowItinerary(false)
         } else {
             console.error('Error deleting itinerary')
@@ -153,7 +232,10 @@ function ItineraryDisplay({ isLoading, itinerary, setItinerary, showItinerary, s
                                             </form>
                                         </div>
                                     ) : (
+                                        <div className='activity-buttons'>
                                         <button className="add-activity-button" onClick={() => handleAddActivity(day)}>+</button>
+                                        <button className='generate-activity-button' onClick={() => handleGenerateActivity(day)} disabled={generatingActivityForDay[day]}>{generatingActivityForDay[day]? 'Generating...': 'Generate new activity' }</button>
+                                        </div>
                                     )}
                                 </article>
                             ));
