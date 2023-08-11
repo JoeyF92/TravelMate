@@ -38,9 +38,9 @@ class Token(db.Model):
 class Preference(db.Model):
     __tablename__ = "preference"
     preference_id = db.Column(db.Integer, primary_key=True)
-    foods = db.Column(db.String, nullable=False)
-    hobbies = db.Column(db.String, nullable=False)
-    other = db.Column(db.String, nullable=False)
+    foods = db.Column(db.String)
+    hobbies = db.Column(db.String)
+    other = db.Column(db.String)
     user_id = db.Column(db.Integer, db.ForeignKey("user.user_id"))
 
     def __init__(self, foods, hobbies, other, user_id):
@@ -53,7 +53,7 @@ class BucketList(db.Model):
     __tablename__ = "bucketlist"
     bucket_id = db.Column(db.Integer, primary_key=True)
     destination = db.Column(db.String, nullable=False)
-    description = db.Column(db.String, nullable=False)
+    description = db.Column(db.String)
     user_id = db.Column(db.Integer, db.ForeignKey("user.user_id"))
 
     def __init__(self, destination, description, user_id):
@@ -83,12 +83,13 @@ class Album(db.Model):
     start_date = db.Column(db.DateTime, nullable=False)
     end_date = db.Column(db.DateTime, nullable=False)
     share_code = db.Column(db.Integer, nullable=False)
+    cover_photo = db.Column(db.String)
     user_id = db.Column(db.Integer, db.ForeignKey("user.user_id"))
     
     content = db.relationship('Content', backref='album')
     itinerary = db.relationship('Itinerary', backref='album')
 
-    def __init__(self, title, location, description, members, start_date, end_date, share_code, user_id):
+    def __init__(self, title, location, description, members, start_date, end_date, share_code, cover_photo, user_id):
         self.title = title
         self.location = location
         self.description = description
@@ -96,14 +97,15 @@ class Album(db.Model):
         self.start_date = start_date
         self.end_date = end_date
         self.share_code = share_code
+        self.cover_photo = cover_photo
         self.user_id = user_id
 
 class Content(db.Model):
     __tablename__ = "content"
     content_id = db.Column(db.Integer, primary_key=True)
-    photo = db.Column(db.String, nullable=False)
-    description = db.Column(db.String, nullable=False)
-    tags = db.Column(db.String, nullable=False)
+    photo = db.Column(db.String)
+    description = db.Column(db.String)
+    tags = db.Column(db.String)
     album_id = db.Column(db.Integer, db.ForeignKey("album.album_id"))
 
     def __init__(self, photo, description, tags, album_id):
