@@ -1,4 +1,4 @@
-from application import db, app, bcrypt
+from application import app, db, bcrypt
 from application.models import User, Token
 from flask import request, jsonify, render_template, redirect, url_for
 import os 

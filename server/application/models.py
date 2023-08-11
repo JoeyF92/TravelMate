@@ -1,4 +1,4 @@
-from application import db, app, bcrypt
+from application import app, db
 from datetime import datetime
 
 app.app_context().push()
