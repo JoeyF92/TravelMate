@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { Link } from "react-router-dom";
+import { Link, useActionData } from "react-router-dom";
 import ImageCarousel from "../ImageCarousel";
 import NewGroupForm from "../NewGroupForm";
 import JoinGroupForm from "../JoinGroupForm";
@@ -10,7 +10,13 @@ import "./styles.css";
 
 export default function ShowGallery() {
   const [groups, setGroups] = useState([]);
-
+  const username = localStorage.username;
+  console.log(localStorage.username);
+  // const token = JSON.parse(localStorage.getItem("token"));
+  // const user_id = token.user_id;
+  // console.log("hello");
+  // console.log(token);
+  // console.log(user_id);
   useEffect(() => {
     async function displayGroups() {
       // add fetch route here
@@ -25,23 +31,6 @@ export default function ShowGallery() {
 
   return (
     <>
-      {/* temp nav bar */}
-      <nav className="navbar">
-        <div className="logo">
-          <img src="logo.png" alt="Logo" />
-        </div>
-        <ul className="nav-links">
-          <li>
-            <a href="#">Home</a>
-          </li>
-          <li>
-            <a href="#">About</a>
-          </li>
-          <li>
-            <a href="#">Contact</a>
-          </li>
-        </ul>
-      </nav>
       <ImageCarousel groups={groups} />
 
       <div id="middle">
