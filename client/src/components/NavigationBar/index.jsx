@@ -11,11 +11,11 @@ export default function NavigationBar() {
         <>
     <Navbar expand="lg">
       <Container>
-        <Navbar.Brand href="/home">
+        <NavLink to="/" className="brand-link">
           <p className="brand">
                 Travel Mate
           </p>
-        </Navbar.Brand>
+        </NavLink>
         <Navbar.Toggle aria-controls="responsive-navbar-nav" className='icon' />
         <Navbar.Collapse id="responsive-navbar-nav">
           <Nav className="ml-auto" activeKey={location.pathname}>
@@ -26,7 +26,7 @@ export default function NavigationBar() {
             <NavLink to="/profile" className="linkStyle">Profile</NavLink>
             <NavLink to="/welcome" className="linkStyle" onClick={() => {
                   localStorage.removeItem("token")
-                  localStorage.removeItem("username")
+                  localStorage.removeItem("user_id")
                 }}>Logout</NavLink>
           </Nav>
         </Navbar.Collapse>

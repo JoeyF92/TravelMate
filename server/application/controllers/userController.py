@@ -104,7 +104,7 @@ def login():
     # new_token = Token(token=token, user_id=user.user_id)
     # db.session.add(new_token)
     # db.session.commit()
-    return jsonify({'message': 'Login successful', 'token': new_token.token, 'username': user.username, 'first_name': user.first_name, 'last_name': user.last_name}), 200
+    return jsonify({'message': 'Login successful', 'token': new_token.token, 'user_id': user.user_id, 'username': user.username, 'first_name': user.first_name, 'last_name': user.last_name}), 200
 
 
 def create_token(id):
