@@ -69,6 +69,41 @@ function ItineraryDisplay({ isLoading, itinerary, setItinerary, showItinerary, s
         setAddingActivityForDay(null);
     }
 
+    const handleSaveItinerary = async () => {
+        console.log(itinerary)
+        console.log(JSON.parse(itinerary))
+        const album_id = 1 //placeholder, need dynamic album_id
+        const response = await fetch('http://127.0.0.1:5000/itinerary/save_itinerary', {
+            method: 'POST',
+            headers: {
+              'Content-Type': 'application/json',
+            },
+            body: JSON.stringify({ album_id: album_id, itinerary: itinerary }),
+          });
+
+          if (response.ok) {
+            const data = await response.json();
+            alert('Itinerary saved successfully!')
+          } else {
+            console.error('Error saving itinerary');
+          }
+       
+    }
+
+    const handleDeleteItinerary = async () => {
+        const album_id = 1 //need dynamic album id
+        const response = await fetch(`http://127.0.0.1:5000/itinerary/delete_itinerary/1`, {
+            method: 'DELETE'
+        })
+
+        if (response.ok) {
+            console.log(response)
+            setShowItinerary(false)
+        } else {
+            console.error('Error deleting itinerary')
+        }
+    }
+
     return (
         <>
         <Modal
@@ -81,6 +116,11 @@ function ItineraryDisplay({ isLoading, itinerary, setItinerary, showItinerary, s
       > 
 
         <Modal.Body className='registrationModal'>
+        <div className="itinerary-header">
+            <button className="save-button" onClick={handleSaveItinerary}>Save</button>
+            <button className="delete-button" onClick={handleDeleteItinerary}>Delete</button>
+          </div>
+
         <section className="itinerary-container">
             {isLoading ? (
                 <img className="loading-icon" src={image} alt="Loading" />
