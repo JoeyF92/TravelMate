@@ -1,4 +1,4 @@
-from application import app, db
+from application import db
 from flask import Blueprint
 from application.controllers.userController import *
 
@@ -14,7 +14,6 @@ def get_user_route(user_id):
      user = get_user_by_id(user_id)
      return user
    
-
 @user_routes.route('/users', methods=['GET'])
 def get_all_users_route():
     users=get_all_users()
@@ -24,7 +23,6 @@ def get_all_users_route():
 def update_user_route(user_id):
     return update_user(user_id)
 
-
 @user_routes.route('/<string:username>', methods=['GET'])
 def get_by_username_route(username):
     return get_by_username(username)
@@ -32,3 +30,7 @@ def get_by_username_route(username):
 @user_routes.route('/login', methods=['POST'])
 def login_route():
     return login()
+
+@user_routes.route('/logout', methods=['DELETE'])
+def logout_route():
+    return logout()

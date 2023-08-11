@@ -1,0 +1,142 @@
+.TravelItineraryGenerator {
+  background-color: #F6F4EB;
+  margin: 0;
+  font-family: 'Poppins', sans-serif;
+  height: 100%;
+}
+
+
+.generate-button {
+  background-color: #4682A9;
+  color: white;
+  padding: 10px 20px;
+  border: none;
+  border-radius: 5px;
+  font-size: 16px;
+  cursor: pointer;
+  transition: transform .4s;
+}
+
+@keyframes spin {
+    from { transform: rotate(0deg); }
+    to { transform: rotate(360deg); }
+  }
+  
+.loading-icon {
+    animation: spin 1.5s linear infinite;
+    height: 100px;
+  }
+  
+
+.itinerary-container {
+    border: 1px solid;
+    display: flex;
+    justify-content: center; 
+    position: relative; 
+    padding: 20px;
+  }
+  
+  .activity-description {
+    list-style-type: disc;
+  }
+  
+  .add-activity-button {
+    background-color: #4682A9;
+    color: white;
+    padding: 2px 10px;
+    border: none;
+    border-radius: 5px;
+    font-size: 20px;
+    cursor: pointer;
+    transition: transform .4s;
+    margin-bottom: 20px;
+  }
+
+  .generate-activity-button {
+    background-color: #4682A9;
+    color: white;
+    padding: 2px 10px;
+    border: none;
+    border-radius: 5px;
+    font-size: 16px;
+    cursor: pointer;
+    transition: transform .4s;
+    margin-bottom: 20px;
+    margin-left: 5px;
+  }
+
+  .cancel-add-activity {
+    color: red;
+    padding: 1px 8px;
+    border: 1px solid grey;
+    border-radius: 5px;
+    font-size: 16px;
+    cursor: pointer;
+    transition: transform .4s;
+    margin-bottom: 20px;
+    margin-left: 5px;
+  }
+
+  .save-add-activity {
+    color: green;
+    padding: 1px 8px;
+    border: 1px solid grey;
+    border-radius: 5px;
+    font-size: 16px;
+    cursor: pointer;
+    transition: transform .4s;
+    margin-bottom: 20px;
+    margin-left: 5px;
+  }
+
+  .add-activity-input{
+    margin-bottom: 10px;
+    width: 30%;
+  }
+
+  .registrationModal {
+    border-radius: 10px;
+    background-color: #F6F4EB;
+}
+
+.itinerary-button {
+  background-color: #4682A9;
+  color: white;
+  padding: 10px 20px;
+  border: none;
+  border-radius: 5px;
+  font-size: 16px;
+  cursor: pointer;
+  transition: transform .4s;
+}
+
+.activity-description li:hover {
+  color: gray;
+  text-decoration: line-through;
+}
+
+.save-button {
+  background-color: #4682A9;
+  color: white;
+  padding: 2px 5px;
+  border: none;
+  border-radius: 5px;
+  font-size: 16px;
+  cursor: pointer;
+  transition: transform .4s;
+  margin-right: 5px;
+  margin-bottom: 5px;
+
+}
+
+.delete-button{
+  background-color: #4682A9;
+  color: white;
+  padding: 2px 5px;
+  border: none;
+  border-radius: 5px;
+  font-size: 16px;
+  cursor: pointer;
+  transition: transform .4s;
+
+}

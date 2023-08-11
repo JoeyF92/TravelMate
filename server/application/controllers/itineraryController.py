@@ -29,3 +29,30 @@ def call_chatgpt_api(system_message, user_message):
     response = requests.post('https://api.openai.com/v1/chat/completions', headers=headers, json=data)
     return response.json()
 
+def save_itinerary():
+    data= request.json
+    itinerary_data = data.get('itinerary')
+    id= data.get('album_id')
+    itinerary = Itinerary(itinerary=itinerary_data, album_id=id)
+    db.session.add(itinerary)
+    db.session.commit()
+    return jsonify({"message": "Itinerary saved successfully"}), 200
+
+def delete_itinerary(album_id):
+    itinerary = Itinerary.query.filter_by(album_id=album_id).first()
+
+    db.session.delete(itinerary)
+    db.session.commit()
+    return jsonify({"message": "Itinerary deleted successfully"})
+
+def get_itinerary(album_id):
+    itinerary = Itinerary.query.filter_by(album_id = album_id).first()
+    if itinerary is None:
+        return jsonify({'message': 'itinerary not found'}), 404
+
+    itinerary_data = {
+        'itinerary_id': itinerary.itinerary_id,
+        'itinerary': itinerary.itinerary,
+    }
+
+    return jsonify(itinerary_data), 200

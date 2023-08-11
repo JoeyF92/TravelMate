@@ -1,4 +1,4 @@
-from application import app, db
+from application import db
 from flask import Blueprint
 from application.controllers.contentController import *
 
