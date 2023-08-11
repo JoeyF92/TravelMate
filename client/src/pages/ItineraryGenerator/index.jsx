@@ -3,7 +3,7 @@ import './styles.css';
 import { ItineraryForm, ItineraryDisplay } from '../../components';
 
 function ItineraryGenerator() {
-  const [itinerary, setItinerary] = useState({});
+  const [itinerary, setItinerary] = useState();
   const [isLoading, setIsLoading] = useState(false);
   const [showItinerary, setShowItinerary] = useState(false)
   const [showItineraryForm, setShowItineraryForm] = useState(false)
@@ -38,10 +38,20 @@ function ItineraryGenerator() {
     }
   };
 
-  const handleShow = () => {
-    // const response = await fetch(`/itinerary/:groupid`)
-    const hasItinerary = false //placeholder
+  const handleShow = async () => {
+    let hasItinerary
+    //const album_id = album_id
+    const response = await fetch(`http://127.0.0.1:5000/itinerary/1`) //need dynamic album_id
+    const data = await response.json();
+    if(response.ok){
+        setItinerary(data.itinerary)
+        hasItinerary = true
+    } else {
+        hasItinerary = false
+    }
+
     hasItinerary? setShowItinerary(true): setShowItineraryForm(true)
+   
     
   }
   return (
