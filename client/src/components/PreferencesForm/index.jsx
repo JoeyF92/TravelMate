@@ -82,7 +82,7 @@ export default function PreferencesForm() {
     return (
         <div className="col">
             <div className="form-container">
-                <h1>Set Your Travel Preferences</h1>
+                <h1>Travel Profile</h1>
                 <form onSubmit={handleSaveClick}>
                     <div className="form-group">
                         <label htmlFor="favourite-foods">My Favorite Foods:</label>
