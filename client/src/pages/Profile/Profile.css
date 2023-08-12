@@ -76,14 +76,14 @@ textarea {
   outline: none;
 }
 
-.edit-button {
+.button-edit {
   float: right;
   font-size: 29px;
   transition: transform .4s;
 }
 
-.save-button {
-  float: right;
+.button-save {
+    float: right;
     background-color: #4682A9;
     color: white;
     padding: 10px 20px;
@@ -94,7 +94,7 @@ textarea {
     transition: transform .4s;
 }
 
-.save-button:hover, .edit-button:hover {
+.button-save:hover, .button-edit:hover {
   transform: scale(1.1); 
 }
 
