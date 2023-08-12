@@ -4,7 +4,7 @@
   gap: 3em;
   width: 80%;
   margin: 50px auto;
-  
+  font-family: "poppins", sans-serif;
 }
 .image-container {
   display: flex;
@@ -31,9 +31,27 @@
 
 .username {
   text-align: center;
-  font-size: 20px;
+  font-size: 25px;
   font-family: "poppins", sans-serif;
   font-weight: 600;
+}
+
+.profile-top {
+  border-bottom: 1px solid #777;
+  margin-bottom: 20px;
+}
+
+.profile-detail {
+  margin-bottom: 20px;
+  border-bottom: 1px solid #777;
+}
+
+.profile-detail label {
+  font-size: 20px;
+}
+
+.profile-detail p {
+  font-size: 18px;
 }
 
 .form-container {

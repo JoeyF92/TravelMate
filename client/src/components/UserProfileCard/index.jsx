@@ -29,21 +29,23 @@ export default function UserProfileCard() {
 
     return (
         <div className="col">
+          <div className="profile-top">
             <div className="image-container">
               <Image src="https://img.icons8.com/color/256/null/user-male-circle--v1.png" roundedCircle />
             </div>
             <p className="username">{user.username}</p>
+          </div>
 
           <div className="profile-detail">
-                <label htmlFor="username" className="block text-lg font-primary">
-                  Full Name
-                </label>
-                <p>{user.first_name} {user.last_name}</p>
+            <label className="block text-lg font-primary">
+              Full Name:
+            </label>
+            <p>{user.first_name} {user.last_name}</p>
           </div>
           
           <div className="profile-detail">
-            <label htmlFor="email" className="block text-lg font-primary">
-              Email
+            <label className="block text-lg font-primary">
+              Email:
             </label>
             <p>{user.email}</p>
           </div>
