@@ -82,7 +82,7 @@ export default function ShowGallery() {
         <div id="all-groups-inner">
           {groups.map((group) => (
             <Link
-              to={`groups/${group.id}`}
+              to={`${group.id}`}
               key={group.id}
               className="group-link"
             >
