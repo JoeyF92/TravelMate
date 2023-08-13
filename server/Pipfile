@@ -5,16 +5,22 @@ name = "pypi"
 
 [packages]
 flask = "*"
-python-dotenv = "*"
 flask-cors = "*"
 flask-sqlalchemy = "*"
 gunicorn = "*"
 psycopg2-binary = "*"
+openai = "*"
+bcrypt = "*"
+flask-bcrypt = "*"
+uuid = "*"
+pyjwt = "*"
 
 [dev-packages]
+pytest = "*"
 
 [requires]
-python_version = "3.9"
+python_version = "3.11"
 
 [scripts]
 dev="flask run"
+test="pytest"
