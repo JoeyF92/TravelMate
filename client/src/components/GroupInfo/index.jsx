@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import mockGroups from "../mocks/data/groupcontent.json";
 import { useParams } from "react-router-dom";
+import {ItineraryGenerator} from '../../components'
 
 import Masonry from "react-masonry-css";
 import "./styles.css";
@@ -53,6 +54,7 @@ export default function GroupInfo() {
     FetchGroupContent();
   }, []);
   console.log("Group Content:", groupContent);
+
   return (
     <>
       <div className="group-info-section">
@@ -75,7 +77,7 @@ export default function GroupInfo() {
         )}
       </div>
 
-      {/* joshes component */}
+      <ItineraryGenerator album_id={album_id}/>
       <div className="memories-gallery">
         <Masonry
           breakpointCols={{

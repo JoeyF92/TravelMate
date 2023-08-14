@@ -3,7 +3,7 @@ import image from '../../assets/Logo-globe.png';
 import { useState, useEffect } from 'react';
 import Modal from 'react-bootstrap/Modal';
 
-function ItineraryDisplay({ isLoading, itinerary, setItinerary, showItinerary, setShowItinerary, location }) {
+function ItineraryDisplay({ isLoading, itinerary, setItinerary, showItinerary, setShowItinerary, location, album_id }) {
     const [newActivity, setNewActivity] = useState('');
     const [addingActivityForDay, setAddingActivityForDay] = useState(null);
     const [generatingActivityForDay, setGeneratingActivityForDay] = useState({});
@@ -117,11 +117,11 @@ function ItineraryDisplay({ isLoading, itinerary, setItinerary, showItinerary, s
     }
 
     const handleSaveItinerary = async () => {
-        const album_id = 1; // Placeholder, need dynamic album_id
     
         try {
+            
             // Check itinerary exists before attempting to delete
-            const checkResponse = await fetch(`http://127.0.0.1:5000/itinerary/${album_id}`);
+            const checkResponse = await fetch(`http://127.0.0.1:5000/itinerary/${album_id.album_id}`);
             
             if (checkResponse.status === 404) {
                 // save the new itinerary directly
@@ -130,7 +130,7 @@ function ItineraryDisplay({ isLoading, itinerary, setItinerary, showItinerary, s
                     headers: {
                         'Content-Type': 'application/json',
                     },
-                    body: JSON.stringify({ album_id: album_id, itinerary: itinerary }),
+                    body: JSON.stringify({ album_id: album_id.album_id, itinerary: itinerary }),
                 });
     
                 if (saveResponse.ok) {
@@ -140,7 +140,7 @@ function ItineraryDisplay({ isLoading, itinerary, setItinerary, showItinerary, s
                 }
             } else if (checkResponse.ok) {
                 // Delete existing itinerary if exists
-                const deleteResponse = await fetch(`http://127.0.0.1:5000/itinerary/delete_itinerary/${album_id}`, {
+                const deleteResponse = await fetch(`http://127.0.0.1:5000/itinerary/delete_itinerary/${album_id.album_id}`, {
                     method: 'DELETE'
                 });
     
@@ -151,7 +151,7 @@ function ItineraryDisplay({ isLoading, itinerary, setItinerary, showItinerary, s
                         headers: {
                             'Content-Type': 'application/json',
                         },
-                        body: JSON.stringify({ album_id: album_id, itinerary: itinerary }),
+                        body: JSON.stringify({ album_id: album_id.album_id, itinerary: itinerary }),
                     });
     
                     if (saveResponse.ok) {
@@ -173,8 +173,7 @@ function ItineraryDisplay({ isLoading, itinerary, setItinerary, showItinerary, s
 
     const handleDeleteItinerary = async () => {
         setShowItinerary(false)
-        const album_id = 1 //need dynamic album id
-        const response = await fetch(`http://127.0.0.1:5000/itinerary/delete_itinerary/1`, {
+        const response = await fetch(`http://127.0.0.1:5000/itinerary/delete_itinerary/${album_id.album_id}`, {
             method: 'DELETE'
         })
 

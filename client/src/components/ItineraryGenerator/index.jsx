@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import './styles.css';
 import { ItineraryForm, ItineraryDisplay, AiSuggestion } from '../../components';
 
-function ItineraryGenerator() {
+function ItineraryGenerator(album_id) {
   const [itinerary, setItinerary] = useState();
   const [isLoading, setIsLoading] = useState(false);
   const [showItinerary, setShowItinerary] = useState(false)
@@ -50,8 +50,7 @@ function ItineraryGenerator() {
     let hasItinerary
 
     try {
-    //const album_id = album_id
-    const response = await fetch(`http://127.0.0.1:5000/itinerary/1`) //need dynamic album_id
+    const response = await fetch(`http://127.0.0.1:5000/itinerary/${album_id.album_id}`)
     const data = await response.json();
     if(response.ok){
         setItinerary(data.itinerary)
@@ -64,21 +63,18 @@ function ItineraryGenerator() {
         console.error("Error fetching itinerary", error)
         hasItinerary=false
     
-    
   }
 
   hasItinerary? setShowItinerary(true): setShowItineraryForm(true)
 
 };
+
   return (
     <div className="TravelItineraryGenerator">
-      <header>
-        <h1>Travel Itinerary Generator</h1>
-      </header>
       <button className="itinerary-button" onClick={handleShow} data-testid="itinerary-button">Itinerary</button>
       <AiSuggestion/>
       <ItineraryForm onSubmit={handleGenerateItinerary} isLoading={isLoading} showItineraryForm={showItineraryForm} setShowItineraryForm={setShowItineraryForm} showItinerary={showItinerary} setShowItinerary={setShowItinerary}/>
-      <ItineraryDisplay isLoading={isLoading} itinerary={itinerary} setItinerary={setItinerary} showItinerary={showItinerary} setShowItinerary={setShowItinerary} location={location} data-testid="itinerary-display"/>
+      <ItineraryDisplay isLoading={isLoading} itinerary={itinerary} setItinerary={setItinerary} showItinerary={showItinerary} setShowItinerary={setShowItinerary} location={location} album_id={album_id} data-testid="itinerary-display"/>
     </div>
   );
 }
