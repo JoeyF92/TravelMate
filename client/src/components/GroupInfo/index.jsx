@@ -1,11 +1,15 @@
 import React, { useState, useEffect } from "react";
 import mockGroups from "../mocks/data/groupcontent.json";
+import { useParams } from "react-router-dom";
+import {ItineraryGenerator} from '../../components'
+
 import Masonry from "react-masonry-css";
 import "./styles.css";
 
 export default function GroupInfo() {
   const [groupInfo, setGroupInfo] = useState([]);
   const [groupContent, setGroupContent] = useState([]);
+  const { id: album_id } = useParams();
 
   function shuffleArray(array) {
     const shuffledArray = [...array]; // Create a copy of the original array to shuffle
@@ -31,17 +35,17 @@ export default function GroupInfo() {
   }
   useEffect(() => {
     async function FetchGroupInfo() {
+      // console.log(localStorage);
       // edit route
-      const response = await fetch("http://127.0.0.1:5000/album/1");
+      const response = await fetch(`http://127.0.0.1:5000/album/${album_id}`);
       const data = await response.json();
       setGroupInfo(data);
     }
     async function FetchGroupContent() {
-      // edit route
-      //   const response = await fetch("http://127.0.0.1:5000/album/1");
-      const response = mockGroups;
-      //   const response = await response.json();
-      const shuffledData = shuffleArray(response);
+      const response = await fetch(`http://127.0.0.1:5000/content/album/1`);
+      const data = await response.json();
+      // const response = mockGroups;
+      const shuffledData = shuffleArray(data);
 
       setGroupContent(shuffledData);
     }
@@ -50,6 +54,7 @@ export default function GroupInfo() {
     FetchGroupContent();
   }, []);
   console.log("Group Content:", groupContent);
+
   return (
     <>
       <div className="group-info-section">
@@ -72,7 +77,7 @@ export default function GroupInfo() {
         )}
       </div>
 
-      {/* joshes component */}
+      <ItineraryGenerator album_id={album_id}/>
       <div className="memories-gallery">
         <Masonry
           breakpointCols={{
@@ -85,16 +90,19 @@ export default function GroupInfo() {
         >
           {groupContent.map((entry) => (
             <div key={entry.id} className="memory-div">
-              {entry.img && (
+              {entry.photo && (
                 <div>
-                  <img src={entry.img} alt={`Image ${entry.id}`} />
+                  <img
+                    src={entry.photo}
+                    alt={`Photo of ${entry.description}`}
+                  />
                   {/* {entry.content && (
                     <p className="memory-image-content">{entry.content}</p>
                   )} */}
                 </div>
               )}
-              {!entry.img && entry.content && (
-                <p className="memory-text-content">{entry.content}</p>
+              {!entry.photo && entry.description && (
+                <p className="memory-text-content">{entry.description}</p>
               )}
             </div>
           ))}

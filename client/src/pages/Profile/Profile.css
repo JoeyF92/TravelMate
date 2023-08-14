@@ -4,7 +4,7 @@
   gap: 3em;
   width: 80%;
   margin: 50px auto;
-  
+  font-family: "poppins", sans-serif;
 }
 .image-container {
   display: flex;
@@ -14,7 +14,6 @@
 }
 
 .col {
-  background-color: #97bad1;
   padding: 10px 50px;
 }
 
@@ -22,31 +21,43 @@
   flex: 1 1 15%;
   height: 50%;
   border-radius: 5px;
+  background-color: #f7fbff;
 }
 
 .content-sidebar > *:nth-child(2) {
   flex: 1 1 60%;
-  border-radius: 5px;
   margin-bottom: 50px;
 }
 
 .username {
   text-align: center;
-  font-size: 20px;
+  font-size: 25px;
   font-family: "poppins", sans-serif;
   font-weight: 600;
 }
 
-.profile-content {
-  padding: 10px 50px;
+.profile-top {
+  border-bottom: 1px solid #777;
+  margin-bottom: 20px;
+}
+
+.profile-detail {
+  margin-bottom: 20px;
+  border-bottom: 1px solid #777;
+}
+
+.profile-detail label {
+  font-size: 20px;
+}
+
+.profile-detail p {
+  font-size: 18px;
 }
 
 .form-container {
   font-family: "poppins", sans-serif;
-
   width: 100%;
-  background-color: #97bad1;
-  padding: 30px;
+  padding: 0 30px;
 }
 
 .form-container h1 {
@@ -65,7 +76,8 @@ label {
 }
 
 textarea {
-  background-color:#d1e3ee;
+  background-color:#a4c6dc;
+  font-size: 20px;
   width: 100%;
   height: 100px;
   padding: 10px;
@@ -76,14 +88,14 @@ textarea {
   outline: none;
 }
 
-.edit-button {
+.button-edit {
   float: right;
-  font-size: 29px;
+  font-size: 30px;
   transition: transform .4s;
 }
 
-.save-button {
-  float: right;
+.button-save {
+    float: right;
     background-color: #4682A9;
     color: white;
     padding: 10px 20px;
@@ -94,7 +106,7 @@ textarea {
     transition: transform .4s;
 }
 
-.save-button:hover, .edit-button:hover {
+.button-save:hover, .button-edit:hover {
   transform: scale(1.1); 
 }
 

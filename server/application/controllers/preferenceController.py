@@ -26,9 +26,13 @@ def update_preference(id):
     from application.models.models import Preference
     data = request.get_json()
     preference = db.session.get(Preference, id)
-    preference.foods = data.foods or preference.foods
-    preference.hobbies = data.hobbies or preference.hobbies
-    preference.other = data.other or preference.other
+    
+    if preference is None:
+        return jsonify({'error': 'Preference not found'}), 404
+
+    preference.foods = data.get("foods", preference.foods)
+    preference.hobbies = data.get("hobbies", preference.hobbies)
+    preference.other = data.get("other", preference.other)
     db.session.commit()
     return jsonify({'message': 'preference details updated!'}), 200
 
