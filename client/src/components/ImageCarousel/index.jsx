@@ -14,11 +14,6 @@ const images = [
     img: "https://res.cloudinary.com/dwxery2ci/image/upload/v1691486277/Final%20Project%20Mocks/greece_il2fxu.jpg",
   },
   {
-    id: 3,
-    title: "Sarah's Hen-do",
-    img: "https://res.cloudinary.com/dwxery2ci/image/upload/v1691486276/Final%20Project%20Mocks/hendo_hfeazn.jpg",
-  },
-  {
     id: 4,
     title: "Cornwall",
     img: "https://res.cloudinary.com/dwxery2ci/image/upload/v1691486276/Final%20Project%20Mocks/cornwall_l9wfrh.jpg",
@@ -30,7 +25,7 @@ const images = [
   },
 ];
 
-export default function ImageCarousel() {
+export default function ImageCarousel({ user_id }) {
   const [currentImageIndex, setCurrentImageIndex] = useState(0);
 
   useEffect(() => {
@@ -40,6 +35,16 @@ export default function ImageCarousel() {
 
     return () => clearInterval(interval);
   }, []);
+
+  // useEffect(() => {
+  //   async function retrieveImages() {
+  //     const response = await fetch(
+  //       `http://127.0.0.1:5000/album/user/${user_id}`
+  //     );
+  //     const data = await response.json();
+  //     setGroups(data);
+  //     console.log(data);
+  //   }
 
   return (
     <div className="slideshow">
