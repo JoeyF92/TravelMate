@@ -1,5 +1,5 @@
-from application import app, db, bcrypt
-from application.models import User, Token
+from application import db, bcrypt
+# from application.models import User, Token
 from flask import request, jsonify, render_template, redirect, url_for
 import os 
 import jwt
@@ -7,6 +7,7 @@ from uuid import uuid4
 
 #  @app.route("/register", methods=["POST"])
 def register():
+    from application.models.models import User
     #  return "<p>Hi!<p>"
 
     data = request.json
@@ -25,6 +26,7 @@ def register():
     return jsonify({'message':'User registered successfully!'}), 201
 
 def get_all_users():
+    from application.models.models import User
     users = User.query.all()
 
     user_list = []
@@ -42,6 +44,7 @@ def get_all_users():
 
 # @app.route('/user/<user_id>', methods=['GET'])
 def get_user_by_id(user_id):
+    from application.models.models import User
     user = User.query.get(user_id)
 
     if user is None:
@@ -59,6 +62,7 @@ def get_user_by_id(user_id):
 
 # @app.route('/user/<user_id>', methods =['PATCH'])
 def update_user(user_id):
+    from application.models.models import User
     user= User.query.filter_by(user_id=user_id)
     data = request.json
     user.update(dict(first_name=data['first_name'],last_name= data['last_name'], email= data['email'], username= data['username'],password= data['password']))
@@ -67,6 +71,7 @@ def update_user(user_id):
     return jsonify({'message':'User updated!'})
 
 def get_by_username(username):
+    from application.models.models import User
     user = User.query.filter_by(username=username).first()
     if user is None:
         return jsonify({'message': 'User not found'}), 404
@@ -83,6 +88,7 @@ def get_by_username(username):
     return jsonify(user_data), 200
 
 def login():
+    from application.models.models import User
     data = request.json
 
     username = data.get('username')
@@ -97,17 +103,11 @@ def login():
         return jsonify({'message': 'Invalid username or password'}), 401 
     new_token = create_token(user.user_id)
     
-    # token_payload = {'user_id': user.user_id}
-    # secret_key = os.environ["SECRET_KEY"]
-    # token = jwt.encode(token_payload, secret_key, algorithm='HS256')
-    # # Store the token in the database
-    # new_token = Token(token=token, user_id=user.user_id)
-    # db.session.add(new_token)
-    # db.session.commit()
     return jsonify({'message': 'Login successful', 'token': new_token.token, 'user_id': user.user_id, 'username': user.username, 'first_name': user.first_name, 'last_name': user.last_name}), 200
 
 
 def create_token(id):
+    from application.models.models import Token
     token = uuid4()
     if not id or not token:
         return jsonify({'message': 'Missing parameters'})
@@ -116,22 +116,9 @@ def create_token(id):
     db.session.commit()
     return newToken
 
-# def logout():
-#     data = request.json
-#     token = data.get('token')
-
-#     if not token:
-#         return jsonify({'message': 'Token missing in request'}), 400
-
-#     token_record = Token.query.filter_by(token=token).first()
-
-#     if not token_record:
-#         return jsonify({'message': 'Token not found'}), 404
-
-#     db.session.delete(token_record)
-#     db.session.commit()
 
 def logout():
+    from application.models.models import Token
     data = request.json
     token_value = data.get('token')
 
@@ -149,11 +136,29 @@ def logout():
         return jsonify({'message': 'Token not found'}), 404
 
 
+def index_content_by_user(user_id):
+    from application.models.models import Content
+    from .albumController import index_album
+    from .contentController import index_content_by_album
 
+    albums, status_code = index_album()
+    members_list = []
+    album_list = []
+    content_list = []
+    filtered_content_list = []
 
-    
+    for album in albums:
+        members = album["members"].split(',')
+        if str(user_id) in members:
+            album_list.extend(str(album["album_id"]))
+        
+    for id in album_list:
+        contents, status_code = index_content_by_album(id)
+        content_list.extend(contents)
 
+    for content in content_list:
+        if content["photo"] != "":
+            filtered_content_list.append(content)
 
-    
-    
+    return filtered_content_list
 

@@ -1,7 +1,8 @@
-from application import app, db
+from application import db
 from datetime import datetime
+from flask import current_app
 
-app.app_context().push()
+# app.app_context().push()
 
 class User(db.Model):
     __tablename__ = "user"

@@ -1,8 +1,9 @@
-from application import db, app
-from application.models import Preference
+from application import db
+# from application.models import Preference
 from flask import request, jsonify, render_template, redirect, url_for
 
 def create_preference(id):
+    from application.models.models import Preference
     data = request.get_json()
     foods = data.get("foods")
     hobbies = data.get("hobbies")
@@ -16,11 +17,13 @@ def create_preference(id):
     return jsonify({"Message": "Successfully added preference"}), 201
 
 def index_preference_by_user_id(id):
+    from application.models.models import Preference
     preference = Preference.query.filter_by(user_id = id).first().__dict__
     preference.pop("_sa_instance_state", None)
     return preference, 200
 
 def update_preference(id):
+    from application.models.models import Preference
     data = request.get_json()
     preference = db.session.get(Preference, id)
     
@@ -34,6 +37,7 @@ def update_preference(id):
     return jsonify({'message': 'preference details updated!'}), 200
 
 def destroy_preference(id):
+    from application.models.models import Preference
     preference = db.session.get(Preference, id)
     db.session.delete(preference)
     db.session.commit()
