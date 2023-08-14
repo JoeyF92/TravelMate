@@ -1,9 +1,10 @@
-from application import db, app
-from application.models import PackingList
+from application import db
+# from application.models import PackingList
 from flask import request, jsonify, render_template, redirect, url_for, json
 
 #POST create the whole list
 def create_packing_list(destination, user_id):
+    from application.models.models import PackingList
     new_packing_list = PackingList(destination=destination, items='[]', user_id=user_id)
     db.session.add(new_packing_list)
     db.session.commit()
@@ -12,6 +13,7 @@ def create_packing_list(destination, user_id):
 
 #GET show all items on the list
 def get_all_items(list_id):
+    from application.models.models import PackingList
     packing_list = PackingList.query.get(list_id)
     print(packing_list)
     if not packing_list:
@@ -25,6 +27,7 @@ def get_all_items(list_id):
 
 #POST add just an item
 def add_item(list_id, item):
+    from application.models.models import PackingList
     packing_list = PackingList.query.get(list_id)
     if not packing_list:
         return jsonify({'message': 'Packing list not found'}), 404
@@ -41,6 +44,7 @@ def add_item(list_id, item):
 
 #DELETE indiviual items on list
 def delete_item(list_id):
+    from application.models.models import PackingList
     data = request.json
     item = data.get('item')
     
@@ -55,8 +59,9 @@ def delete_item(list_id):
     else:
         return jsonify({'message': 'Item not found in packing list'}), 404
     
-#DELETE whoe list
+#DELETE whole list
 def delete_packing_list(list_id):
+    from application.models.models import PackingList
     packing_list = PackingList.query.get(list_id)
     if not packing_list:
         return jsonify({'message': 'Packing list not found'}), 404

@@ -1,8 +1,9 @@
-from application import db, app
-from application.models import Content
+from application import db
+# from application.models import Content
 from flask import request, jsonify, render_template, redirect, url_for
 
 def index_content():
+    from application.models.models import Content
     content = Content.query.all()
     data = [d.__dict__ for d in content]
     for item in data:
@@ -10,6 +11,7 @@ def index_content():
     return data, 200
 
 def create(id):
+    from application.models.models import Content
     data = request.get_json()
     photo = data.get("photo")
     description = data.get("description")
@@ -23,6 +25,7 @@ def create(id):
     return jsonify({"Message": "Successfully added new content"}), 201
 
 def index_content_by_album(id):
+    from application.models.models import Content
     content = Content.query.filter_by(album_id = id).all()
     data = [d.__dict__ for d in content]
     for item in data:
@@ -30,11 +33,13 @@ def index_content_by_album(id):
     return data, 200
 
 def index_content(id):
+    from application.models.models import Content
     content = Content.query.filter_by(content_id = id).first().__dict__
     content.pop("_sa_instance_state", None)
     return content, 200
 
 def update_content(id):
+    from application.models.models import Content
     data = request.get_json()
     content = db.session.get(Content, id)
     photo = data.photo or content.photo
@@ -44,12 +49,14 @@ def update_content(id):
     return jsonify({"message": "Content details updated!"}), 200
 
 def destroy_content(id):
+    from application.models.models import Content
     content = db.session(Content, id)
     db.session.delete(content)
     db.session.commit()
     return jsonify({'message': 'Content deleted!'}), 204
 
 def destroy_content_by_album(id):
+    from application.models.models import Content
     contents = index_content_by_album(id)
     for c in contents:
         content = db.session.get(Content, c.get("content_id"))

@@ -1,5 +1,7 @@
-from application import app, db
-from application.models import User, Album, BucketList, Content, Itinerary, PackingList, Preference, Token
+from application import db, create_app
+from application.models.models import User, Album, BucketList, Content, Itinerary, PackingList, Preference, Token
+
+app = create_app()
 
 def delete_database():
     with app.app_context():
@@ -55,6 +57,8 @@ def add_entries():
 
     album1 = Album(title="Travel Mate", location="Paris", description="Nice relaxing holiday after a long project!", members="1,2,3,4,5", start_date="2023-08-18T08:00:00Z", end_date="2023-08-25T08:00:00Z", share_code=123456, cover_photo="https://images.adsttc.com/media/images/5d44/14fa/284d/d1fd/3a00/003d/large_jpg/eiffel-tower-in-paris-151-medium.jpg?1564742900", user_id=1)
 
+    album2 = Album(title="Travel Mate", location="Paris", description="Nice relaxing holiday after a long project!", members="2,3,4,5,6,7", start_date="2023-08-18T08:00:00Z", end_date="2023-08-25T08:00:00Z", share_code=123456, cover_photo="https://images.adsttc.com/media/images/5d44/14fa/284d/d1fd/3a00/003d/large_jpg/eiffel-tower-in-paris-151-medium.jpg?1564742900", user_id=2)
+
     content1 = Content(photo="https://res.cloudinary.com/dwxery2ci/image/upload/v1691678245/holiday-content/th-3805981138_trtqa1.jpg", description="John couldn't stop laughing when we got lost trying to find our way around Berlin's charming streets!", tags="lost,berlin,laughing", album_id=1)
     content2 = Content(photo="https://res.cloudinary.com/dwxery2ci/image/upload/v1691678250/holiday-content/th-2490909086_od64ai.jpg", description="Emily had a blast exploring Berlin's vibrant street art scene and even tried her hand at graffiti!", tags="berlin,graffiti", album_id=1)
     content3 = Content(photo="https://res.cloudinary.com/dwxery2ci/image/upload/v1691678256/holiday-content/th-3260287098_fapa7f.jpg", description="Alex's favorite memory from the weekend in Berlin was devouring delicious currywurst with a view of the Brandenburger Tor!", tags="berlin,food", album_id=1)
@@ -69,6 +73,9 @@ def add_entries():
     content12 = Content(photo="", description="Explored the remnants of the Berlin Wall with John, Emily, and Alex, reflecting on history's lessons.", tags="berlin wall,history", album_id=1)
     content13 = Content(photo="", description="Alex and Emily enjoyed a romantic sunset over the Berlin skyline, making unforgettable memories.", tags="sunset,berlin", album_id=1)
     content14 = Content(photo="", description="John discovered his hidden talent for bratwurst grilling during a fun-filled barbecue in Berlin!", tags="bratwurst,grilling,berlin", album_id=1)
+
+    content15 = Content(photo="https://res.cloudinary.com/dwxery2ci/image/upload/v1691678245/holiday-content/th-3805981138_trtqa1.jpg", description="John couldn't stop laughing when we got lost trying to find our way around Berlin's charming streets!", tags="lost,berlin,laughing", album_id=2)
+    content16 = Content(photo="https://res.cloudinary.com/dwxery2ci/image/upload/v1691678250/holiday-content/th-2490909086_od64ai.jpg", description="Emily had a blast exploring Berlin's vibrant street art scene and even tried her hand at graffiti!", tags="berlin,graffiti", album_id=2)
 
     with app.app_context():
         db.session.add(user1)
@@ -113,6 +120,7 @@ def add_entries():
         db.session.add(packinglist21)
 
         db.session.add(album1)
+        db.session.add(album2)
 
         db.session.add(content1)
         db.session.add(content2)
@@ -128,6 +136,8 @@ def add_entries():
         db.session.add(content12)
         db.session.add(content13)
         db.session.add(content14)
+        db.session.add(content15)
+        db.session.add(content16)
 
         db.session.commit()
 
