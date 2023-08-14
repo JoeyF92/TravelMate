@@ -3,6 +3,7 @@ import { Link, useActionData } from "react-router-dom";
 import ImageCarousel from "../ImageCarousel";
 import NewGroupForm from "../NewGroupForm";
 import JoinGroupForm from "../JoinGroupForm";
+
 //delete when swapped
 import mockGroups from "../mocks/data/groups.json";
 
@@ -10,6 +11,29 @@ import "./styles.css";
 
 export default function ShowGallery() {
   const [groups, setGroups] = useState([]);
+  const stockGroups = [
+    {
+      id: 1,
+      title: "Group Holiday",
+      img: "https://res.cloudinary.com/dwxery2ci/image/upload/v1692029925/Final%20Project%20Mocks/pool-party_r7e5tx.jpg",
+    },
+    {
+      id: 2,
+      title: "Stag/Hen Party",
+      img: "https://res.cloudinary.com/dwxery2ci/image/upload/v1692029924/Final%20Project%20Mocks/74175-stag-party-games_xvel7x.jpg",
+    },
+
+    {
+      id: 3,
+      title: "Work Trip",
+      img: "https://res.cloudinary.com/dwxery2ci/image/upload/v1692029924/Final%20Project%20Mocks/workhol_dptwpk.jpgg",
+    },
+    {
+      id: 4,
+      title: "Family Adventure",
+      img: "https://res.cloudinary.com/dwxery2ci/image/upload/v1692029925/Final%20Project%20Mocks/fam-hol_dnk26k.jpg",
+    },
+  ];
 
   let user_id = localStorage.user_id;
   //delete this line iab
@@ -35,25 +59,47 @@ export default function ShowGallery() {
       <div id="middle">
         <div id="create-group-all">
           <div id="create-group-left">
-            <h2> Begin your new adventure </h2>
+            <h2>
+              {" "}
+              <span className="emoji" role="img" aria-label="Plane">
+                ✈️
+              </span>{" "}
+              Begin Your New Adventure{" "}
+            </h2>
             <p>
               Experience the joy of collaborative travel planning. Create a
               group and embark on an adventure where everyone's preferences come
               to life.
             </p>
-            <h2> Capture Every Moment </h2>
-            <p>
-              Cherish the moments that matter. Share photos, videos, and stories
-              from your trip within your group, creating a digital memory lane
-              you'll all treasure forever.
-            </p>
-            <h2> Dine Like Locals</h2>
+            <h2>
+              <span className="emoji" role="img" aria-label="Knife and Fork">
+                🍴
+              </span>{" "}
+              Dine Like Locals
+            </h2>
             <p>
               Finding the perfect restaurant has never been easier. Let our AI
               suggest local gems for your group to dine, ensuring every taste
               bud is satisfied.
             </p>
-            <h2> Your Itinerary, Your Way:</h2>
+            <h2>
+              <span role="img" aria-label="Camera Flash">
+                📸
+              </span>{" "}
+              Capture Every Moment
+            </h2>
+            <p>
+              Cherish the moments that matter. Share photos, videos, and stories
+              from your trip within your group, creating a digital memory lane
+              you'll all treasure forever.
+            </p>
+
+            <h2>
+              <span className="emoji" role="img" aria-label="Tick Box">
+                ✅
+              </span>{" "}
+              Your Itinerary Your Way
+            </h2>
             <p>
               Tailor your itinerary to suit everyone's interests. Our AI crafts
               a seamless plan that embraces the diversity of your group's
@@ -76,18 +122,35 @@ export default function ShowGallery() {
       </div>
       <div id="all-groups">
         <div id="all-groups-heading">
-          <h3> View upcoming trips, relive past memories: </h3>
+          {groups.length === 0 ? (
+            <h3>
+              {" "}
+              Here You Can View Your Upcoming Trips + Re-live Past Memories:{" "}
+            </h3>
+          ) : (
+            <h3> View Your Upcoming Trips + Relive Past Memories: </h3>
+          )}
         </div>
         <div id="all-groups-inner">
-          {groups.map((group, i) => (
-            <Link to={`${group.album_id}`} key={i} className="group-link">
-              <img
-                src={group.cover_photo}
-                alt={`Group Id:${group.album_id} Image`}
-              />
-              <div className="group-title">{group.title}</div>
-            </Link>
-          ))}
+          {groups.length === 0
+            ? stockGroups.map((group, i) => (
+                <Link to={`${group.album_id}`} key={i} className="group-link">
+                  <img
+                    src={group.cover_photo}
+                    alt={`Group Id:${group.album_id} Image`}
+                  />
+                  <div className="group-title">{group.title}</div>
+                </Link>
+              ))
+            : groups.map((group, i) => (
+                <Link to={`${group.album_id}`} key={i} className="group-link">
+                  <img
+                    src={group.cover_photo}
+                    alt={`Group Id:${group.album_id} Image`}
+                  />
+                  <div className="group-title">{group.title}</div>
+                </Link>
+              ))}
         </div>
       </div>
     </>
