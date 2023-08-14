@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { DateSelection } from '../../components';
 import Modal from 'react-bootstrap/Modal';
 
@@ -8,8 +8,12 @@ function ItineraryForm({ onSubmit, isLoading, showItineraryForm, setShowItinerar
   const [endDate, setEndDate] = useState(new Date());
   const [budget, setBudget] = useState('');
   const [occasion, setOccasion] = useState('');
+  const [typingMessage, setTypingMessage] = useState('')
 
-  const handleClose = () => setShowItineraryForm(false);
+  const handleClose = () => {
+    setShowItineraryForm(false);
+    setTypingMessage('')
+  }
 
 
   const handleGenerateClick = async (e) => {
@@ -27,6 +31,24 @@ function ItineraryForm({ onSubmit, isLoading, showItineraryForm, setShowItinerar
 
     await onSubmit({ location, startDate, endDate, budget, occasion });
   };
+
+  useEffect (() => {
+    
+    const introMessage = "Hello! I'm your TravelMate AI. Share your details, and I'll create a customised itinerary just for you!";
+    let currentMessage = '';
+    let currentIndex = 0;
+    const typingInterval = setInterval(() => {
+      if (currentIndex < introMessage.length) {
+        currentMessage += introMessage[currentIndex];
+        setTypingMessage(currentMessage);
+        currentIndex++;
+      } else {
+        clearInterval(typingInterval);
+      }
+    }, 30);
+    return () => clearInterval(typingInterval);
+  }, [showItineraryForm])
+
 
   return (
     <>
@@ -46,19 +68,20 @@ function ItineraryForm({ onSubmit, isLoading, showItineraryForm, setShowItinerar
               <h2 className="text-center text-2xl font-primary">
                 Generate Your Itinerary
               </h2>
+              <p><strong>{typingMessage}</strong></p>
             </div>
 
 
 
-    <section className="mt-10 sm:mx-auto sm:w-full sm:max-w-sm">
+    <section className="mt-2 sm:mx-auto sm:w-full sm:max-w-sm">
       <form className="space-y-2"> 
-        <label for="start-date" class="block text-sm font-primary leading-6 text-gray-900">Start date</label>
+        <label htmlFor="start-date" className="block text-sm font-primary leading-6 text-gray-900">Start date</label>
         <DateSelection selected={startDate} onChange={date => setStartDate(date)} />
-        <label for="end-date" class="block text-sm font-primary leading-6 text-gray-900">End date:</label>
+        <label htmlFor="end-date" className="block text-sm font-primary leading-6 text-gray-900">End date:</label>
         <DateSelection selected={endDate} onChange={date => setEndDate(date)} />
 
         <div>
-          <label for="destination" class="block text-sm font-primary leading-6 text-gray-900">Destination:</label>
+          <label htmlFor="destination" className="block text-sm font-primary leading-6 text-gray-900">Destination:</label>
           <div className="mt-2">
             <input
               type="text"
@@ -71,7 +94,7 @@ function ItineraryForm({ onSubmit, isLoading, showItineraryForm, setShowItinerar
         </div>
         
         <div>
-          <label for="budget" class="block text-sm font-primary leading-6 text-gray-900">Budget (£):</label>
+          <label htmlFor="budget" className="block text-sm font-primary leading-6 text-gray-900">Budget (£):</label>
           <div className='mt-2'>
             <input
               type="number"
@@ -84,7 +107,7 @@ function ItineraryForm({ onSubmit, isLoading, showItineraryForm, setShowItinerar
         </div>
         
         <div>
-          <label for="occasion" class="block text-sm font-primary leading-6 text-gray-900">Occasion:</label>
+          <label htmlFor="occasion" className="block text-sm font-primary leading-6 text-gray-900">Occasion:</label>
           <div className='mt-2'>
             <input
               type="text"
