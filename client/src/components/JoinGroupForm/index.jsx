@@ -16,20 +16,22 @@ export default function JoinGroupForm() {
 
   return (
     <div className="join-form-container">
-      <form className="group-form" onSubmit={handleJoinSubmit}>
-        <div className="form-group">
-          <label htmlFor="joinCode">Join a group:</label>
-          <input
-            type="text"
-            id="joinCode"
-            name="joinCode"
-            placeholder="Enter Group Code"
-            value={joinCode}
-            onChange={handleJoinCodeChange}
-          />
-        </div>
+      <form className="join-group-form" onSubmit={handleJoinSubmit}>
+        <label className="join-label" htmlFor="joinCode">
+          Join an existing group:
+        </label>
+        <input
+          className="join-input-text"
+          type="text"
+          id="joinCode"
+          name="joinCode"
+          placeholder="Enter Group Code"
+          value={joinCode}
+          onChange={handleJoinCodeChange}
+        />
+
         <button className="join-button" type="submit">
-          Join
+          Submit
         </button>
       </form>
     </div>

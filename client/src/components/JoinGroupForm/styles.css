@@ -7,27 +7,26 @@
   margin-top: 2rem;
 }
 
-.group-form {
-  width: 100%;
+.join-group-form {
+  width: 85%;
+  background-color: #f8e3ca;
   padding: 20px;
   border-radius: 8px;
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  min-height: 11rem;
+  position: relative;
 }
 
-.form-group {
-  margin-bottom: 20px;
-}
-
-label {
+.join-label {
   display: block;
   font-weight: bold;
   margin-bottom: 6px;
+  font-size: 1.2rem;
 }
 
-input[type="text"] {
+.join-input-text {
   width: 100%;
   padding: 10px;
-  border: 1px solid #ccc;
   border-radius: 4px;
   font-size: 16px;
 }
@@ -38,9 +37,13 @@ input[type="text"] {
   padding: 10px 20px;
   border: none;
   border-radius: 5px;
-  font-size: 16px;
+  font-size: 12px;
   cursor: pointer;
   transition: background-color 0.3s ease-in-out;
+  position: absolute;
+  bottom: 0;
+  right: 0;
+  margin: 10px;
 }
 
 .join-button:hover {
