@@ -10,20 +10,19 @@ import "./styles.css";
 
 export default function ShowGallery() {
   const [groups, setGroups] = useState([]);
-  const username = localStorage.username;
-  console.log(localStorage.username);
-  // const token = JSON.parse(localStorage.getItem("token"));
-  // const user_id = token.user_id;
-  // console.log("hello");
-  // console.log(token);
-  // console.log(user_id);
+
+  let user_id = localStorage.user_id;
+  //delete this line iab
+  user_id = 1;
+
   useEffect(() => {
     async function displayGroups() {
-      // add fetch route here
-      //   const response = await fetch("");
-      //   const data = await response.json();
-      setGroups(mockGroups);
-      console.log(groups);
+      const response = await fetch(
+        `http://127.0.0.1:5000/album/user/${user_id}`
+      );
+      const data = await response.json();
+      setGroups(data);
+      console.log(data);
     }
 
     displayGroups();
@@ -31,7 +30,7 @@ export default function ShowGallery() {
 
   return (
     <>
-      <ImageCarousel groups={groups} />
+      <ImageCarousel user_id={user_id} />
 
       <div id="middle">
         <div id="create-group-all">
@@ -80,13 +79,12 @@ export default function ShowGallery() {
           <h3> View upcoming trips, relive past memories: </h3>
         </div>
         <div id="all-groups-inner">
-          {groups.map((group) => (
-            <Link
-              to={`${group.id}`}
-              key={group.id}
-              className="group-link"
-            >
-              <img src={group.img} alt={`Group Id:${group.id} Image`} />
+          {groups.map((group, i) => (
+            <Link to={`${group.album_id}`} key={i} className="group-link">
+              <img
+                src={group.cover_photo}
+                alt={`Group Id:${group.album_id} Image`}
+              />
               <div className="group-title">{group.title}</div>
             </Link>
           ))}

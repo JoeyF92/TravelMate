@@ -33,16 +33,17 @@ input[type="text"] {
 }
 
 .join-button {
-  background-color: #007bff;
+  background-color: #4682a9;
   color: #fff;
-  border: none;
-  border-radius: 4px;
   padding: 10px 20px;
+  border: none;
+  border-radius: 5px;
   font-size: 16px;
   cursor: pointer;
   transition: background-color 0.3s ease-in-out;
 }
 
 .join-button:hover {
-  background-color: #0056b3;
+  background-color: #325b76;
+  transform: scale(1.025);
 }
