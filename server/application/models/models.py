@@ -1,7 +1,8 @@
-from application import app, db
+from application import db
 from datetime import datetime
+from flask import current_app
 
-app.app_context().push()
+# app.app_context().push()
 
 class User(db.Model):
     __tablename__ = "user"
@@ -38,9 +39,9 @@ class Token(db.Model):
 class Preference(db.Model):
     __tablename__ = "preference"
     preference_id = db.Column(db.Integer, primary_key=True)
-    foods = db.Column(db.String(100))
-    hobbies = db.Column(db.String(100))
-    other = db.Column(db.String(100))
+    foods = db.Column(db.String(100), nullable=True)
+    hobbies = db.Column(db.String(100), nullable=True)
+    other = db.Column(db.String(100), nullable=True)
     user_id = db.Column(db.Integer, db.ForeignKey("user.user_id"))
 
     def __init__(self, foods, hobbies, other, user_id):

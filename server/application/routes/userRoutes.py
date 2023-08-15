@@ -34,3 +34,7 @@ def login_route():
 @user_routes.route('/logout', methods=['DELETE'])
 def logout_route():
     return logout()
+
+@user_routes.route('/content/<int:user_id>', methods=["GET"])
+def get_content_by_user(user_id):
+    return index_content_by_user(user_id)

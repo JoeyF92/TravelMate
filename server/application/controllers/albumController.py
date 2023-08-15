@@ -1,11 +1,12 @@
-from application import app, db
-from application.models import Album
+from application import db
+# from application.models import Album
 from flask import request, jsonify, render_template, redirect, url_for
 from random import randint
-from .contentController import destroy_content_by_album
+# from .contentController import destroy_content_by_album
 
 def index_album():
     #   return "<p>Hi!<p>"
+    from application.models.models import Album
     albums = Album.query.all()
     data = [d.__dict__ for d in albums]
     for item in data:
@@ -13,6 +14,7 @@ def index_album():
     return data, 200
 
 def create(id):
+    from application.models.models import Album
     data = request.get_json()
     title = data.get("title")
     location = data.get("location")
@@ -31,6 +33,7 @@ def create(id):
     return jsonify({"Message": "Successfully added a new album"}), 201
 
 def index_albums_by_user(id):
+    from application.models.models import Album
     albums = Album.query.filter_by(user_id = id).all()
     data = [d.__dict__ for d in albums]
     for item in data:
@@ -38,11 +41,13 @@ def index_albums_by_user(id):
     return data, 200
 
 def index_album_by_id(id):
+    from application.models.models import Album
     album = Album.query.filter_by(album_id = id).first().__dict__
     album.pop("_sa_instance_state", None)
     return album, 200
 
 def update_album(id):
+    from application.models.models import Album
     data = request.get_json()
     album = db.session.get(Album, id)
     album.title = data.title or album.title
@@ -57,8 +62,16 @@ def update_album(id):
 
 #Deletes the content in the album before deleting the album itself
 def destroy_album(id):
+    from application.models.models import Album
+    from .contentController import destroy_content_by_album
     album = db.session.get(Album, id)
     destroy_content_by_album(id)
     db.session.delete(album)
     db.session.commit()
     return jsonify({'message': 'Album deleted!'}), 204
+
+def index_album_by_code(code):
+    from application.models.models import Album
+    album = Album.query.filter_by(share_code = code).first().__dict__
+    album.pop("_sa_instance_state", None)
+    return album, 200
