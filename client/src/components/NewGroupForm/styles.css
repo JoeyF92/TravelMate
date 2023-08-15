@@ -7,11 +7,13 @@
 }
 
 .form-wrapper {
-  width: 85%;
+  width: 100%;
 }
 
 .group-form {
   width: 85%;
+  min-height: 7rem;
+  margin: auto;
   padding: 0;
   background-color: #f8e3ca;
   padding: 20px;
@@ -41,28 +43,28 @@
   display: none;
 }
 
-label {
+.new-form-label {
   display: block;
   font-weight: bold;
   margin-bottom: 6px;
+  font-size: 1.1rem;
 }
 
-input[type="text"],
-textarea {
+.new-form-text-input,
+.new-form-textarea {
   width: 100%;
   padding: 10px;
-  border: 1px solid #ccc !important;
-  background-color: #fff !important;
+  background-color: #fff;
   border-radius: 4px;
   font-size: 16px;
 }
 
-input[type="file"] {
+.new-form-file-input {
   width: 100%;
   padding: 8px 0;
   cursor: pointer;
-  border: none !important;
-  background-color: #f8e3ca !important;
+  border: none;
+  background-color: #f8e3ca;
 }
 
 .submit-button,
@@ -72,9 +74,13 @@ input[type="file"] {
   padding: 10px 20px;
   border: none;
   border-radius: 5px;
-  font-size: 16px;
+  font-size: 12px;
   cursor: pointer;
   transition: background-color 0.3s ease-in-out;
+  position: absolute;
+  bottom: 0;
+  right: 0;
+  margin: 10px;
 }
 
 .submit-button:hover,
@@ -104,6 +110,12 @@ input[type="file"] {
   display: flex;
   align-items: center;
   gap: 10px;
+  width: 100%;
+}
+
+.new-form-date-picker {
+  width: 100%;
+  height: 2rem;
 }
 
 .react-datepicker {
@@ -115,7 +127,7 @@ input[type="file"] {
 }
 
 .react-datepicker__header {
-  background-color: #007bff;
+  background-color: #4682a9;
   border-radius: 4px 4px 0 0;
   color: #fff;
 }
@@ -130,7 +142,7 @@ input[type="file"] {
 
 .react-datepicker__day--selected,
 .react-datepicker__day--keyboard-selected {
-  background-color: #007bff;
+  background-color: #4682a9;
   color: #fff;
 }
 
@@ -159,13 +171,13 @@ input[type="file"] {
   border-radius: 50%;
   padding: 6px;
   background-color: transparent;
-  color: #007bff;
+  color: #4682a9;
   transition: background-color 0.3s ease-in-out, color 0.3s ease-in-out;
 }
 
 .react-datepicker__navigation--previous:hover,
 .react-datepicker__navigation--next:hover {
-  background-color: #f4f4f4;
+  background-color: #f8e3ca;
 }
 
 .react-datepicker__input-container {
