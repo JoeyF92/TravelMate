@@ -26,7 +26,7 @@ export default function ShowGallery() {
     {
       id: 3,
       title: "Work Trip",
-      img: "https://res.cloudinary.com/dwxery2ci/image/upload/v1692029924/Final%20Project%20Mocks/workhol_dptwpk.jpgg",
+      img: "https://res.cloudinary.com/dwxery2ci/image/upload/v1692029924/Final%20Project%20Mocks/workhol_dptwpk.jpg",
     },
     {
       id: 4,
@@ -37,7 +37,7 @@ export default function ShowGallery() {
 
   let user_id = localStorage.user_id;
   //delete this line iab
-  user_id = 1;
+  // user_id = 1;
 
   useEffect(() => {
     async function displayGroups() {
@@ -123,10 +123,7 @@ export default function ShowGallery() {
       <div id="all-groups">
         <div id="all-groups-heading">
           {groups.length === 0 ? (
-            <h3>
-              {" "}
-              Here You Can View Your Upcoming Trips + Re-live Past Memories:{" "}
-            </h3>
+            <h3> Plan Your Upcoming Trips + Relive Past Memories: </h3>
           ) : (
             <h3> View Your Upcoming Trips + Relive Past Memories: </h3>
           )}
@@ -134,13 +131,10 @@ export default function ShowGallery() {
         <div id="all-groups-inner">
           {groups.length === 0
             ? stockGroups.map((group, i) => (
-                <Link to={`${group.album_id}`} key={i} className="group-link">
-                  <img
-                    src={group.cover_photo}
-                    alt={`Group Id:${group.album_id} Image`}
-                  />
+                <div key={i} className="group-link">
+                  <img src={group.img} alt={`Group Id:${group.id} Image`} />
                   <div className="group-title">{group.title}</div>
-                </Link>
+                </div>
               ))
             : groups.map((group, i) => (
                 <Link to={`${group.album_id}`} key={i} className="group-link">
