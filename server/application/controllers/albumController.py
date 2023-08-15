@@ -48,13 +48,13 @@ def update_album(id):
     from application.models.models import Album
     data = request.get_json()
     album = db.session.get(Album, id)
-    album.title = data.title or album.title
-    album.location = data.location or album.location
-    album.description = data.description or album.description
-    album.members = data.members or album.members
-    album.start_date = data.start_date or album.start_date
-    album.end_date = data.end_date or album.end_date
-    album.cover_photo = data.cover_photo or album.cover_photo
+    album.title = data['title'] or album.title
+    album.location = data['location'] or album.location
+    album.description = data['description'] or album.description
+    album.members = data['members'] or album.members
+    album.start_date = data['start_date'] or album.start_date
+    album.end_date = data['end_date'] or album.end_date
+    album.cover_photo = data['cover_photo'] or album.cover_photo
     db.session.commit()
     return jsonify({'message': 'Album details updated!'}), 200
 
