@@ -57,7 +57,7 @@ def add_entries():
 
     album1 = Album(title="Travel Mate", location="Paris", description="Nice relaxing holiday after a long project!", members="1,2,3,4,5", start_date="2023-08-18T08:00:00Z", end_date="2023-08-25T08:00:00Z", share_code=123456, cover_photo="https://images.adsttc.com/media/images/5d44/14fa/284d/d1fd/3a00/003d/large_jpg/eiffel-tower-in-paris-151-medium.jpg?1564742900", user_id=1)
 
-    album2 = Album(title="Travel Mate", location="Paris", description="Nice relaxing holiday after a long project!", members="2,3,4,5,6,7", start_date="2023-08-18T08:00:00Z", end_date="2023-08-25T08:00:00Z", share_code=123456, cover_photo="https://images.adsttc.com/media/images/5d44/14fa/284d/d1fd/3a00/003d/large_jpg/eiffel-tower-in-paris-151-medium.jpg?1564742900", user_id=2)
+    album2 = Album(title="Travel Mate", location="Paris", description="Nice relaxing holiday after a long project!", members="2,3,4,5,6,7", start_date="2023-08-18T08:00:00Z", end_date="2023-08-25T08:00:00Z", share_code=123457, cover_photo="https://images.adsttc.com/media/images/5d44/14fa/284d/d1fd/3a00/003d/large_jpg/eiffel-tower-in-paris-151-medium.jpg?1564742900", user_id=2)
 
     content1 = Content(photo="https://res.cloudinary.com/dwxery2ci/image/upload/v1691678245/holiday-content/th-3805981138_trtqa1.jpg", description="John couldn't stop laughing when we got lost trying to find our way around Berlin's charming streets!", tags="lost,berlin,laughing", album_id=1)
     content2 = Content(photo="https://res.cloudinary.com/dwxery2ci/image/upload/v1691678250/holiday-content/th-2490909086_od64ai.jpg", description="Emily had a blast exploring Berlin's vibrant street art scene and even tried her hand at graffiti!", tags="berlin,graffiti", album_id=1)
