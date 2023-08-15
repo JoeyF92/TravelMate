@@ -53,7 +53,7 @@ def create_app(env=None):
     # app.register_blueprint(bucket_routes, url_prefix="/bucket")
     app.register_blueprint(content_routes, url_prefix="/content")
     app.register_blueprint(itinerary_routes, url_prefix="/itinerary")
-    # app.register_blueprint(packing_routes, url_prefix="/packing")
+    app.register_blueprint(packing_routes, url_prefix="/packing")
     app.register_blueprint(preference_routes, url_prefix="/preference")
 
     return app
