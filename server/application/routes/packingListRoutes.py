@@ -14,18 +14,13 @@ def create_packing_route():
 def get_all_list_route(user_id):
     return get_all_items(user_id)
 
-@packing_routes.route('/<int:list_id>/add', methods=['POST'])
-def add_item_route(list_id):
-    return add_item(list_id)
+@packing_routes.route('/<int:list_id>', methods=['PATCH'])
+def update_packing_route(list_id):
+    return update_packing(list_id)
 
 
-
-@packing_routes.route('/packinglist/<int:list_id>/delete_item', methods=['DELETE'])
-def delete_item_route():
+@packing_routes.route('/<int:list_id>', methods=['DELETE'])
+def delete_item_route(list_id):
     return delete_item(list_id)
-
-@packing_routes.route('/packinglist/<int:list_id>', methods=['DELETE'])
-def delete_all_list_route():
-    return delete_packing_list(list_id)
 
 
