@@ -1,8 +1,6 @@
 from application import db
-# from application.models import Album
 from flask import request, jsonify, render_template, redirect, url_for
 from random import randint
-# from .contentController import destroy_content_by_album
 
 def index_album():
     #   return "<p>Hi!<p>"
