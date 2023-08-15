@@ -23,7 +23,7 @@ export default function JoinGroupForm() {
       const membersArray = album.members.split(",").map(Number);
 
       // Check if user is already a member of the group
-      if (membersArray.includes(parseInt(777))) {
+      if (membersArray.includes(parseInt(localStorage.user_id))) {
         console.log("You are already a member of that group");
       } else {
         membersArray.push(parseInt(localStorage.user_id));

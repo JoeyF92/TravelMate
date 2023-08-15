@@ -2,7 +2,7 @@
   position: relative;
   width: 100%;
   margin: auto;
-  height: 45vw;
+  height: 25vw;
   overflow: hidden;
   /* clip-path: polygon(0 0, 100% 0, 100% 90%, 0 70%); */
 }
