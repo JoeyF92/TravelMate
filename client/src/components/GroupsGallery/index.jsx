@@ -36,8 +36,6 @@ export default function ShowGallery() {
   ];
 
   let user_id = localStorage.user_id;
-  //delete this line iab
-  // user_id = 1;
 
   useEffect(() => {
     async function displayGroups() {
