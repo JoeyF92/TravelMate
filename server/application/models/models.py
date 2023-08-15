@@ -12,6 +12,7 @@ class User(db.Model):
     email = db.Column(db.String(50), nullable=False)
     username = db.Column(db.String(20), nullable=False)
     password = db.Column(db.String(100), nullable=False)
+    profile_pic = db.Column(db.String(200))
     
     token = db.relationship('Token', backref='user')
     preference = db.relationship('Preference', backref='user')
@@ -19,12 +20,13 @@ class User(db.Model):
     packinglist = db.relationship('PackingList', backref='user')
     album = db.relationship('Album', backref='user')
 
-    def __init__(self, first_name, last_name, email, username, password):
+    def __init__(self, first_name, last_name, email, username, password, profile_pic):
         self.first_name = first_name
         self.last_name = last_name
         self.email = email
         self.username = username
         self.password = password
+        self.profile_pic = profile_pic
 
 class Token(db.Model):
     __tablename__ = "token"
