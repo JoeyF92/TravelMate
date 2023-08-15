@@ -28,8 +28,8 @@ def create_app(env=None):
         app.config["SECRET_KEY"] = os.getenv("SECRET_KEY")
         app.config['OPENAI_API_KEY'] = os.environ.get("OPENAI_API_KEY")
         url = os.getenv("TEST_DB_URL")
-        if 'postgresql' not in url:
-            url.replace("postgres","postgresql")
+        # if 'postgresql' not in url:
+        #     url.replace("postgres","postgresql")
     else:
         # If the environment is not 'TEST', configure the app for regular use.
         app.config["TESTING"] = False
@@ -38,8 +38,8 @@ def create_app(env=None):
         app.config["SECRET_KEY"] = os.getenv("SECRET_KEY")
         app.config['OPENAI_API_KEY'] = os.environ.get("OPENAI_API_KEY")
         url = os.getenv("DB_URL")
-        if 'postgresql' not in url:
-            url.replace("postgres","postgresql")
+        # if 'postgresql' not in url:
+            # url.replace("postgres","postgresql")
 
 
     db.init_app(app)
