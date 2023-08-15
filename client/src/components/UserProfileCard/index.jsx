@@ -6,6 +6,7 @@ import Image from 'react-bootstrap/Image';
 export default function UserProfileCard() {
     const userId = localStorage.getItem("user_id"); 
     const [user, setUser] = useState(null);
+    const [selectedImage, setSelectedImage] = useState(null);
 
     useEffect(() => {
         async function getUserInfo() {
@@ -23,18 +24,52 @@ export default function UserProfileCard() {
         getUserInfo();
       }, []);
 
+      useEffect(() => {
+        const savedImageData = localStorage.getItem('profile_picture');
+        if (savedImageData) {
+          setSelectedImage(savedImageData);
+        }
+      }, []);
+    
+      const handleImageChange = (event) => {
+        const file = event.target.files[0];
+        const reader = new FileReader();
+        reader.onload = function () {
+          setSelectedImage(reader.result);
+          localStorage.setItem('profile_picture', reader.result);
+        };
+        reader.readAsDataURL(file);
+      };
+    
       if (!user) {
         return <p className="loading-message">Loading user information...</p>;
-      }    
+      }
 
     return (
         <div className="col">
-          <div className="profile-top">
-            <div className="image-container">
-              <Image src="https://img.icons8.com/color/256/null/user-male-circle--v1.png" roundedCircle />
-            </div>
-            <p className="username">{user.username}</p>
+          <div className="profile-top d-flex align-items-center flex-column">
+          <div className="image-container">
+            <Image
+              src={
+                selectedImage ||
+                'https://img.icons8.com/?size=512&id=ABBSjQJK83zf&format=png'
+              }
+              style={{ width: '200px', height: '200px'}}
+              roundedCircle
+            />
+            <input
+              type="file"
+              accept="image/*"
+              onChange={handleImageChange}
+              id="fileInput"
+              style={{ display: 'none' }}
+            />
           </div>
+        <button className="button-picture" onClick={() => document.getElementById('fileInput').click()}>
+          Change Picture
+        </button>
+        <p className="username">{user.username}</p>
+      </div>
 
           <div className="profile-detail">
             <label className="block text-lg font-primary">
