@@ -61,16 +61,17 @@ class BucketList(db.Model):
         self.description = description
         self.user_id = user_id
 
+
 class PackingList(db.Model):
     __tablename__ = "packinglist"
     list_id = db.Column(db.Integer, primary_key=True)
-    destination = db.Column(db.String(100), nullable=False)
     items = db.Column(db.String(20), nullable=False)
+    item_status = db.Column(db.Boolean, nullable=False, default=False)
     user_id = db.Column(db.Integer, db.ForeignKey("user.user_id"))
-
-    def __init__(self, destination, items, user_id):
-        self.destination = destination
+    
+    def __init__(self, items, user_id, item_status=False):
         self.items = items
+        self.item_status = item_status
         self.user_id = user_id
 
 class Album(db.Model):

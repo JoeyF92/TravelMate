@@ -10,13 +10,13 @@ def create_packing_route():
     return create_packing_list()
 
 
-@packing_routes.route('/<int:list_id>', methods=['GET'])
-def get_all_list_route(list_id):
-    return get_all_items(list_id)
+@packing_routes.route('/<int:user_id>', methods=['GET'])
+def get_all_list_route(user_id):
+    return get_all_items(user_id)
 
 @packing_routes.route('/<int:list_id>/add', methods=['POST'])
 def add_item_route(list_id):
-    return add_item_packing(list_id)
+    return add_item(list_id)
 
 
 
