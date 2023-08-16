@@ -48,6 +48,7 @@ def update_album(id):
     from application.models.models import Album
     data = request.get_json()
     album = db.session.get(Album, id)
+
     if 'title' in data:
         album.title = data['title']
     if 'location' in data:

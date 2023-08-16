@@ -38,3 +38,4 @@ def destroy_album_by_id(album_id):
 @album_routes.route("/code/<int:share_code>")
 def get_album_by_code(share_code):
     return index_album_by_code(share_code)
+
