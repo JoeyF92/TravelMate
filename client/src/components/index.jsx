@@ -10,5 +10,6 @@ export { default as ItineraryDisplay } from "./ItineraryDisplay";
 export { default as ItineraryForm } from "./ItineraryForm";
 export { default as UserProfileCard } from "./UserProfileCard";
 export { default as PreferencesForm } from "./PreferencesForm";
-export {default as AiSuggestion} from "./AiSuggestion";
-export {default as ItineraryGenerator} from "./ItineraryGenerator";
+export { default as AiSuggestion } from "./AiSuggestion";
+export { default as ItineraryGenerator } from "./ItineraryGenerator";
+export { default as AlbumUploader } from "./AlbumUploader";
