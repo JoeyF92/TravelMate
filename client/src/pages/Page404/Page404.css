@@ -1,0 +1,15 @@
+.not-found {
+    text-align: center;
+    margin-top: 100px;
+    font-family: "poppins", sans-serif;
+}
+
+.not-found h1 {
+    font-size: 100px;
+    font-weight: 600;
+}
+
+.not-found p {
+    font-size: 50px;
+    font-weight: 400;
+}

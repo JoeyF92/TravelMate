@@ -34,7 +34,7 @@ export default function PackingListForm({ userId, setList, list }) {
       return (
         <form className="input-form" onSubmit={(e) => { e.preventDefault(); addPackingItem(inputText); }}>
           <div className="packing-item-input">
-            <input value={inputText} type="text" className="item-input" placeholder="Add a new item..." onChange={e => setInputText(e.target.value)} />
+            <input value={inputText} type="text" className="item-input" placeholder="e.g. Passport" onChange={e => setInputText(e.target.value)} />
             <button type="submit" className="input-item-button"><FontAwesomeIcon icon={faPlus} style={{color: "#ffffff",}} /></button>
           </div>
           
