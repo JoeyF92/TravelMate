@@ -1,11 +1,17 @@
-from application import create_app
+from application import create_app, db
 import pytest, os
 
-@pytest.fixture
-def create_app():
+
+@pytest.fixture()
+def client():
     app = create_app("TEST")
 
-    yield app
+    # with app.app_context():
+    #         db.create_all()
 
-    # del os.environ("TEST_DB_URL")
-    # del os.environ("SECRET_KEY")
+    with app.test_client() as client:
+        yield client
+    
+    # with app.app_context():
+    #      db.session.remove()
+    #      db.drop_all()

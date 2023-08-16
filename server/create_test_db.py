@@ -1,7 +1,7 @@
 from application import db, create_app
 from application.models.models import User, Album, BucketList, Content, Itinerary, PackingList, Preference, Token
 
-app = create_app()
+app = create_app("TEST")
 
 def delete_database():
     with app.app_context():
@@ -14,6 +14,7 @@ def create_database():
 
 
 def add_entries():
+
     user1 = User(first_name="Mahir", last_name="Jalil", email="mj@travelmate.com", username="mahir", password="$2b$10$0UsBpSb6f1SGBZL1vl2xQepH.Kzc/s.6DRvWyd8GNEH07XQTtNIG2", profile_pic="")
     user2 = User(first_name="Joe", last_name="Fountain", email="jf@travelmate.com", username="joe", password="$2b$10$M4U.i5AoIKkQEkg19uiqle0RYOUsJHoUQIRXbimvt.VkBdlizGcHG", profile_pic="")
     user3 = User(first_name="Sabrina", last_name="Wright", email="sw@travelmate.com", username="sabrina", password="$2b$10$B7ApN9WVoln93GEYfQetGuC/Gj5NyhFxkRN3GJykd2yreelNuNd1K", profile_pic="")

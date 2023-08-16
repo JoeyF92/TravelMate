@@ -19,7 +19,8 @@ def register():
         last_name=data['last_name'],
         email=data['email'],
         username=data['username'],
-        password= hashed_password
+        password= hashed_password,
+        profile_pic=""
     )
     db.session.add(new_user)
     db.session.commit()
@@ -36,7 +37,8 @@ def get_all_users():
             'first_name': user.first_name,
             'last_name': user.last_name,
             'email': user.email,
-            'username': user.username
+            'username': user.username,
+            'profile_pic': user.profile_pic
         }
         user_list.append(user_data)
 
@@ -55,7 +57,8 @@ def get_user_by_id(user_id):
         'first_name': user.first_name,
         'last_name': user.last_name,
         'email': user.email,
-        'username': user.username
+        'username': user.username,
+        'profile_pic': user.profile_pic
     }
 
     return jsonify(user_data), 200
@@ -82,7 +85,8 @@ def get_by_username(username):
         'last_name': user.last_name,
         'email': user.email,
         'username': user.username,
-        'password':user.password
+        'password':user.password,
+        'profile_pic': user.profile_pic
     }
 
     return jsonify(user_data), 200

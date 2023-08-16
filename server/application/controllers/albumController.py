@@ -1,8 +1,6 @@
 from application import db
-# from application.models import Album
 from flask import request, jsonify, render_template, redirect, url_for
 from random import randint
-# from .contentController import destroy_content_by_album
 
 def index_album():
     #   return "<p>Hi!<p>"
@@ -50,13 +48,21 @@ def update_album(id):
     from application.models.models import Album
     data = request.get_json()
     album = db.session.get(Album, id)
-    album.title = data['title'] or album.title
-    album.location = data['location'] or album.location
-    album.description = data['description'] or album.description
-    album.members = data['members'] or album.members
-    album.start_date = data['start_date'] or album.start_date
-    album.end_date = data['end_date'] or album.end_date
-    album.cover_photo = data['cover_photo'] or album.cover_photo
+
+    if 'title' in data:
+        album.title = data['title']
+    if 'location' in data:
+        album.location = data['location']
+    if 'description' in data:
+        album.description = data['description']
+    if 'members' in data:
+        album.members = data['members']
+    if 'start_date' in data:
+        album.start_date = data['start_date']
+    if 'end_date' in data:
+        album.end_date = data['end_date']
+    if 'cover_photo' in data:
+        album.cover_photo = data['cover_photo']
     db.session.commit()
     return jsonify({'message': 'Album details updated!'}), 200
 
