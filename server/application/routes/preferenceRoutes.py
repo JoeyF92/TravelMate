@@ -23,3 +23,8 @@ def update_preference_by_id(preference_id):
 @preference_routes.route("/<int:preference_id>", methods=['DELETE'])
 def destroy_preference_by_id(preference_id):
     return destroy_preference(preference_id)
+
+#Get preferences by album id
+@preference_routes.route("/album/<int:album_id>")
+def get_preference_by_album(album_id):
+    return index_preference_by_album(album_id)

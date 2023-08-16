@@ -1,6 +1,6 @@
 from application import db
 # from application.models import Preference
-from flask import request, jsonify, render_template, redirect, url_for
+from flask import request, jsonify
 
 def create_preference(id):
     from application.models.models import Preference
@@ -42,3 +42,30 @@ def destroy_preference(id):
     db.session.delete(preference)
     db.session.commit()
     return jsonify({'message': 'preference deleted!'}), 204
+
+def index_preference_by_album(album_id):
+    from .albumController import index_album_by_id
+
+    album, status_code = index_album_by_id(album_id)
+    foods = []
+    hobbies = []
+    other = []
+
+    members = album["members"].split(',')
+    for member in members:
+        preference, status = index_preference_by_user_id(member)
+
+        if preference.get("foods"):
+            foods.extend(preference.get("foods","").split(","))
+        if preference.get("hobbies"):
+            hobbies.extend(preference.get("hobbies","").split(","))
+        if preference.get("other"):
+            other.extend(preference.get("other","").split(","))
+    
+    all_pref = {
+        "foods": ", ".join(foods),
+        "hobbies": ", ".join(hobbies),
+        "other": ", ".join(other)
+    }
+
+    return all_pref, 200
