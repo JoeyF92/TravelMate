@@ -14,6 +14,7 @@ export default function GroupInfo() {
   const [groupInfo, setGroupInfo] = useState([]);
   const [groupContent, setGroupContent] = useState([]);
   const { id: album_id } = useParams();
+  const [isCodeCopied, setIsCodeCopied] = useState(false);
 
   //Function for shuffling retrieved images, so they are in random order on page
   function shuffleArray(array) {
@@ -38,6 +39,52 @@ export default function GroupInfo() {
 
     return shuffledArray;
   }
+
+  //functions for reformatting the dates:
+  const calculateNightCount = () => {
+    if (groupInfo.start_date && groupInfo.end_date) {
+      const start = new Date(groupInfo.start_date);
+      const end = new Date(groupInfo.end_date);
+      return Math.floor((end - start) / (1000 * 60 * 60 * 24));
+    }
+    return 0;
+  };
+  const formatDate = (date) => {
+    const day = date.getDate();
+    const month = date.toLocaleString("en-US", { month: "long" });
+
+    const getDayWithSuffix = (day) => {
+      if (day >= 11 && day <= 13) {
+        return `${day}th`;
+      }
+      switch (day % 10) {
+        case 1:
+          return `${day}st`;
+        case 2:
+          return `${day}nd`;
+        case 3:
+          return `${day}rd`;
+        default:
+          return `${day}th`;
+      }
+    };
+
+    return `${getDayWithSuffix(day)} ${month}`;
+  };
+
+  // copy to clipboard feature:
+  const copyCodeToClipboard = () => {
+    const codeToCopy = groupInfo.share_code;
+    navigator.clipboard.writeText(codeToCopy).then(
+      () => {
+        setIsCodeCopied(true);
+        setTimeout(() => setIsCodeCopied(false), 2000); // Reset after 2 seconds
+      },
+      (error) => {
+        console.error("Failed to copy code: ", error);
+      }
+    );
+  };
 
   // Retrieve group information on page load
   useEffect(() => {
@@ -75,20 +122,42 @@ export default function GroupInfo() {
       <div className="group-info-section">
         {groupInfo ? (
           <div className="group-info-section-left">
+            <div className="group-info-section-photo">
+              <img src={groupInfo.cover_photo}></img>
+            </div>
             <div className="group-info-section-left-content">
-              <h1>{groupInfo.title}</h1>
-              {groupInfo.location && <p>Location: {groupInfo.location}</p>}
-              {groupInfo.description && <p>{groupInfo.description}</p>}
-              {groupInfo.members && <p>Members: {groupInfo.members}</p>}
-              {groupInfo.start_date && groupInfo.end_date && (
-                <p>
-                  {new Date(groupInfo.start_date).toLocaleDateString()} to{" "}
-                  {new Date(groupInfo.end_date).toLocaleDateString()}
-                </p>
-              )}
-              {groupInfo.share_code && (
-                <p>Share Code: {groupInfo.share_code}</p>
-              )}
+              <div>
+                <h1>
+                  {groupInfo.title}{" "}
+                  {groupInfo.location && (
+                    <span id="location-span">({groupInfo.location})</span>
+                  )}
+                </h1>
+                {groupInfo.description && <p>{groupInfo.description}</p>}
+                {/* {groupInfo.members && <p>Members: {groupInfo.members}</p>} */}
+                {groupInfo.start_date && groupInfo.end_date && (
+                  <p>
+                    {formatDate(new Date(groupInfo.start_date))} -{" "}
+                    {formatDate(new Date(groupInfo.end_date))}
+                    {` (${calculateNightCount()} nights)`}
+                  </p>
+                )}
+                {groupInfo.share_code && (
+                  <div>
+                    <p>
+                      Add members with share code: {groupInfo.share_code}{" "}
+                      <button
+                        id="clipboard-button"
+                        onClick={copyCodeToClipboard}
+                      >
+                        📋Copy
+                      </button>
+                    </p>
+
+                    {isCodeCopied && <p>Code copied to clipboard!</p>}
+                  </div>
+                )}
+              </div>
             </div>
           </div>
         ) : (

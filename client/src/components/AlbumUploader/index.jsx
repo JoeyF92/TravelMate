@@ -121,7 +121,7 @@ export default function AlbumUpload({ album_id, onUpload }) {
         aria-labelledby="contained-modal-title-vcenter"
         centered
         keyboard={false}
-        size="lg"
+        size="m"
       >
         <Modal.Body className="upload-asset-modal registrationModal">
           <label
