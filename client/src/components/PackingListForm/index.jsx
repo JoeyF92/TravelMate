@@ -8,6 +8,10 @@ export default function PackingListForm({ userId, setList, list }) {
     const [inputText, setInputText] = useState('');
     
     async function addPackingItem(text) {
+      if (text.trim() === '') {
+        return;
+      }
+
       try {
         const response = await axios.post(`${config.baseUrl}/packing/add`, {
           user_id: userId, 

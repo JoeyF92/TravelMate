@@ -146,8 +146,12 @@ export default function AuthModal({ buttonLabel, showPlaneIcon }) {
                                   type="text" 
                                   required 
                                   value={loginForm.username}
+<<<<<<< Updated upstream
                                   className="block w-full rounded-md border-0 py-1.5 pl-2 text-gray-900 shadow-sm"
                                   data-testid='username-input'
+=======
+                                  className="block w-full rounded-md border-0 py-1.5 pl-2 text-gray-900 outline-none shadow-sm"
+>>>>>>> Stashed changes
                                 />
                             </div>
                         </div>
@@ -164,7 +168,7 @@ export default function AuthModal({ buttonLabel, showPlaneIcon }) {
                                   type="password" 
                                   required 
                                   value={loginForm.password}
-                                  className="block w-full rounded-md border-0 py-1.5 pl-2 text-gray-900 shadow-sm"
+                                  className="block w-full rounded-md border-0 py-1.5 pl-2 text-gray-900 outline-none shadow-sm"
                                 />
                             </div>
                         </div>
@@ -187,7 +191,7 @@ export default function AuthModal({ buttonLabel, showPlaneIcon }) {
                                   type="text"
                                   required
                                   value={registrationForm.firstName}
-                                  className="block w-full rounded-md border-0 py-1.5 pl-2 text-gray-900 shadow-sm"
+                                  className="block w-full rounded-md border-0 py-1.5 pl-2 text-gray-900 outline-none shadow-sm"
                                 />
                             </div>
                         </div>
@@ -202,7 +206,7 @@ export default function AuthModal({ buttonLabel, showPlaneIcon }) {
                                   type="text"
                                   required
                                   value={registrationForm.lastName} 
-                                  className="block w-full rounded-md border-0 py-1.5 pl-2 text-gray-900 shadow-sm"
+                                  className="block w-full rounded-md border-0 py-1.5 pl-2 text-gray-900 outline-none shadow-sm"
                                 />
                             </div>
                         </div>
@@ -217,7 +221,7 @@ export default function AuthModal({ buttonLabel, showPlaneIcon }) {
                                   type="email"
                                   required
                                   value={registrationForm.email} 
-                                  className="block w-full rounded-md border-0 py-1.5 pl-2 text-gray-900 shadow-sm"
+                                  className="block w-full rounded-md border-0 py-1.5 pl-2 text-gray-900 outline-none shadow-sm"
                                 />
                             </div>
                         </div>
@@ -232,7 +236,7 @@ export default function AuthModal({ buttonLabel, showPlaneIcon }) {
                                   type="text"
                                   required
                                   value={registrationForm.username} 
-                                  className="block w-full rounded-md border-0 py-1.5 pl-2 text-gray-900 shadow-sm"
+                                  className="block w-full rounded-md border-0 py-1.5 pl-2 text-gray-900 outline-none shadow-sm"
                                 />
                             </div>
                         </div>
@@ -249,7 +253,7 @@ export default function AuthModal({ buttonLabel, showPlaneIcon }) {
                                   type="password"
                                   required
                                   value={registrationForm.password}
-                                  className="block w-full rounded-md border-0 py-1.5 pl-2 text-gray-900 shadow-sm"
+                                  className="block w-full rounded-md border-0 py-1.5 pl-2 text-gray-900 outline-none shadow-sm"
                                 />
                             </div>
                         </div>

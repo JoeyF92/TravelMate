@@ -163,11 +163,15 @@ export default function AiSuggestion(album_id) {
             <input
               type="text"
               onChange={(e) => setCurrentLocation(e.target.value)}
-              className="location-input block w-full rounded-md border-0 py-1.5 pl-2 text-gray-900 shadow-sm"
+              className="location-input block w-full rounded-tl-md rounded-bl-md border-0 py-1.5 pl-2 text-gray-900 outline-none shadow-sm"
               value={currentLocation}
               data-testid='location-input'
             />
+<<<<<<< Updated upstream
             <button className="use-my-location-button flex w-14. justify-center items-center rounded-md bg-theme-blue px-3 py-1.5 text-sm font-primary leading-6 text-white shadow-sm hover:opacity-75" onClick={getLocation} title="Use my current location" data-testid='get-location-button'>
+=======
+            <button className="use-my-location-button flex w-14. justify-center items-center rounded-tr-md rounded-br-md bg-theme-blue px-3 py-1.5 text-sm font-primary leading-6 text-white shadow-sm hover:opacity-75" onClick={getLocation} title="Use my current location">
+>>>>>>> Stashed changes
                 {locationLoading? 'loading...': <FontAwesomeIcon icon={faLocationCrosshairs} size='xl' />}
         </button>
           </div>
@@ -176,7 +180,7 @@ export default function AiSuggestion(album_id) {
           <input
               type="text"
               onChange={(e) => setPreferences(e.target.value)}
-              className="block w-full rounded-md border-0 py-1.5 pl-2 text-gray-900 shadow-sm"
+              className="block w-full rounded-md border-0 py-1.5 pl-2 text-gray-900 outline-none shadow-sm"
               placeholder='e.g. "steak" or "fast-food"'
               
             />
