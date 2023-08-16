@@ -5,10 +5,10 @@ import {
   Homepage,
   GroupsPage,
   GroupPage,
-  BucketList,
   PackingList,
   Profile,
-  ProtectedRoute
+  ProtectedRoute,
+  Page404
 } from "./pages"
 import { AuthProvider } from "./contexts";
 import { NavigationBar } from "./components";
@@ -26,9 +26,9 @@ function App() {
                 <Route index element={<GroupsPage />} />
                 <Route path=":id" element={<GroupPage />} />
               </Route>
-              <Route path="/bucket-list" element={<BucketList />} />
               <Route path="/packing-list" element={<PackingList />} />
               <Route path="/profile" element={<Profile />} />
+              <Route path="/*" element={<Page404 />} />
             </Route>
           </Route>
       </Routes>

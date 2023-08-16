@@ -8,3 +8,4 @@ export { default as Profile } from "./Profile";
 export { default as ProtectedRoute } from "./ProtectedRoute";
 export { default as GroupsPage } from "./GroupsPage";
 export { default as GroupPage } from "./GroupPage";
+export { default as Page404 } from "./Page404";
