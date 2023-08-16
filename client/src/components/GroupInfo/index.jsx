@@ -1,7 +1,11 @@
 import React, { useState, useEffect } from "react";
 import mockGroups from "../mocks/data/groupcontent.json";
 import { useParams } from "react-router-dom";
-import {ItineraryGenerator} from '../../components'
+import {
+  AlbumUploader,
+  ItineraryGenerator,
+  AiSuggestion,
+} from "../../components";
 
 import Masonry from "react-masonry-css";
 import "./styles.css";
@@ -11,6 +15,7 @@ export default function GroupInfo() {
   const [groupContent, setGroupContent] = useState([]);
   const { id: album_id } = useParams();
 
+  //Function for shuffling retrieved images, so they are in random order on page
   function shuffleArray(array) {
     const shuffledArray = [...array]; // Create a copy of the original array to shuffle
 
@@ -33,51 +38,77 @@ export default function GroupInfo() {
 
     return shuffledArray;
   }
+
+  // Retrieve group information on page load
   useEffect(() => {
     async function FetchGroupInfo() {
-      // console.log(localStorage);
-      // edit route
       const response = await fetch(`http://127.0.0.1:5000/album/${album_id}`);
       const data = await response.json();
       setGroupInfo(data);
     }
-    async function FetchGroupContent() {
-      const response = await fetch(`http://127.0.0.1:5000/content/album/1`);
-      const data = await response.json();
-      // const response = mockGroups;
-      const shuffledData = shuffleArray(data);
-
-      setGroupContent(shuffledData);
-    }
-
     FetchGroupInfo();
-    FetchGroupContent();
   }, []);
-  console.log("Group Content:", groupContent);
+
+  // Function for fetching all group content
+  const fetchGroupContent = async () => {
+    console.log("calling fetch");
+    const response = await fetch(`http://127.0.0.1:5000/content/album/1`);
+    const data = await response.json();
+    const shuffledData = shuffleArray(data);
+    setGroupContent(shuffledData);
+  };
+
+  //fetch group content on page load
+  useEffect(() => {
+    // Fetch group content when the component mounts
+    fetchGroupContent();
+  }, []);
+
+  // Callback function to update groupContent when new content is uploaded via AlbumUploader component
+  const handleUpload = () => {
+    console.log("calling fetch group");
+    fetchGroupContent();
+  };
 
   return (
     <>
       <div className="group-info-section">
         {groupInfo ? (
           <div className="group-info-section-left">
-            <h1>{groupInfo.title}</h1>
-            {groupInfo.location && <p>Location: {groupInfo.location}</p>}
-            {groupInfo.description && <p>{groupInfo.description}</p>}
-            {groupInfo.members && <p>Members: {groupInfo.members}</p>}
-            {groupInfo.start_date && groupInfo.end_date && (
-              <p>
-                {new Date(groupInfo.start_date).toLocaleDateString()} to{" "}
-                {new Date(groupInfo.end_date).toLocaleDateString()}
-              </p>
-            )}
-            {groupInfo.share_code && <p>Share Code: {groupInfo.share_code}</p>}
+            <div className="group-info-section-left-content">
+              <h1>{groupInfo.title}</h1>
+              {groupInfo.location && <p>Location: {groupInfo.location}</p>}
+              {groupInfo.description && <p>{groupInfo.description}</p>}
+              {groupInfo.members && <p>Members: {groupInfo.members}</p>}
+              {groupInfo.start_date && groupInfo.end_date && (
+                <p>
+                  {new Date(groupInfo.start_date).toLocaleDateString()} to{" "}
+                  {new Date(groupInfo.end_date).toLocaleDateString()}
+                </p>
+              )}
+              {groupInfo.share_code && (
+                <p>Share Code: {groupInfo.share_code}</p>
+              )}
+            </div>
           </div>
         ) : (
-          <p>Loading...</p>
+          <div className="group-info-section-left">
+            <p>Loading...</p>
+          </div>
         )}
+        <div className="group-info-section-right">
+          <div>
+            <AlbumUploader album_id={album_id} onUpload={handleUpload} />
+          </div>
+          <div>
+            <ItineraryGenerator album_id={album_id} />
+          </div>
+          <div>
+            <AiSuggestion />
+          </div>
+        </div>
       </div>
 
-      <ItineraryGenerator album_id={album_id}/>
       <div className="memories-gallery">
         <Masonry
           breakpointCols={{

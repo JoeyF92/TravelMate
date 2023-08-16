@@ -1,0 +1,27 @@
+/* Upload Styles */
+
+.upload-asset-modal > textarea {
+  background-color: #fff !important;
+  font-size: 16px;
+}
+
+.upload-asset-modal > input {
+  padding-top: 1rem;
+  padding-bottom: 1rem;
+}
+
+.upload-asset-button {
+  background-color: #4682a9;
+  color: white;
+  padding: 10px 20px;
+  border: none;
+  border-radius: 5px;
+  font-size: 16px;
+  cursor: pointer;
+  transition: transform 0.4s;
+}
+
+.upload-asset-button:hover {
+  background-color: #325b76;
+  transform: scale(1.025);
+}
