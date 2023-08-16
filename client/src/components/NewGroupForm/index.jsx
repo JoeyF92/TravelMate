@@ -111,12 +111,12 @@ export default function NewGroupForm() {
   };
 
   return (
-    <div className="form-container">
-      <div className="form-wrapper">
-        <div className="group-form" ref={formRef}>
+    <div className="new-form-container">
+      <div className="new-form-wrapper">
+        <div className="new-group-form" ref={formRef}>
           {formStatus === "hidden" && (
             <label className="new-form-label" id="create-form-title">
-              Start a New Group
+              Start a New Group:
             </label>
           )}
 
@@ -124,7 +124,7 @@ export default function NewGroupForm() {
             Create
           </button>
           <form className={"create-form  display-none"} onSubmit={handleSubmit}>
-            <div className="form-group">
+            <div className="new-form-group">
               <label className="new-form-label" htmlFor="groupName">
                 Group Name:
               </label>
@@ -137,7 +137,7 @@ export default function NewGroupForm() {
                 onChange={handleInputChange}
               />
             </div>
-            <div className="form-group">
+            <div className="new-form-group">
               <label className="new-form-label" htmlFor="location">
                 Location:
               </label>
@@ -150,7 +150,7 @@ export default function NewGroupForm() {
                 onChange={handleInputChange}
               />
             </div>
-            <div className="form-group">
+            <div className="new-form-group">
               <label className="new-form-label">Date Range:</label>
               <div className="date-picker-container">
                 <DatePicker
@@ -177,7 +177,7 @@ export default function NewGroupForm() {
                 />
               </div>
             </div>
-            <div className="form-group">
+            <div className="new-form-group">
               <label className="new-form-label" htmlFor="description">
                 Description:
               </label>
@@ -189,7 +189,7 @@ export default function NewGroupForm() {
                 onChange={handleInputChange}
               />
             </div>
-            <div className="form-group">
+            <div className="new-form-group">
               <label className="new-form-label" htmlFor="image">
                 Image:
               </label>
