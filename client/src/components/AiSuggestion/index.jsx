@@ -152,7 +152,7 @@ export default function AiSuggestion(album_id) {
         aria-labelledby="contained-modal-title-vcenter"
         centered
         keyboard={false}
-        size='lg'
+        size='md'
       > 
 
         <Modal.Body className='registrationModal'>
@@ -167,7 +167,7 @@ export default function AiSuggestion(album_id) {
               value={currentLocation}
               data-testid='location-input'
             />
-            
+
             <button className="use-my-location-button flex w-14. justify-center items-center rounded-tr-md rounded-br-md bg-theme-blue px-3 py-1.5 text-sm font-primary leading-6 text-white shadow-sm hover:opacity-75" onClick={getLocation} title="Use my current location">
 
                 {locationLoading? 'loading...': <FontAwesomeIcon icon={faLocationCrosshairs} size='xl' />}
