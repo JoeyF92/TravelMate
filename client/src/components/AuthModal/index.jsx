@@ -146,12 +146,8 @@ export default function AuthModal({ buttonLabel, showPlaneIcon }) {
                                   type="text" 
                                   required 
                                   value={loginForm.username}
-<<<<<<< Updated upstream
-                                  className="block w-full rounded-md border-0 py-1.5 pl-2 text-gray-900 shadow-sm"
                                   data-testid='username-input'
-=======
                                   className="block w-full rounded-md border-0 py-1.5 pl-2 text-gray-900 outline-none shadow-sm"
->>>>>>> Stashed changes
                                 />
                             </div>
                         </div>
