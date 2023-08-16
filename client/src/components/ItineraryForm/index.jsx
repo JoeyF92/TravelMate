@@ -119,7 +119,7 @@ function ItineraryForm({ onSubmit, isLoading, showItineraryForm, setShowItinerar
           </div>
         </div>
 
-        <button className=" mt-10 flex w-full justify-center rounded-md bg-theme-blue px-3 py-1.5 text-sm font-primary leading-6 text-white shadow-sm hover:opacity-75" onClick={handleGenerateClick} disabled={isLoading}>
+        <button className=" mt-10 flex w-full justify-center rounded-md bg-theme-blue px-3 py-1.5 text-sm font-primary leading-6 text-white shadow-sm hover:opacity-75" onClick={handleGenerateClick} disabled={isLoading} data-testid="generate-button">
           {isLoading ? 'Generating your perfect holiday...' : 'Generate Itinerary'}
         </button>
       </form>

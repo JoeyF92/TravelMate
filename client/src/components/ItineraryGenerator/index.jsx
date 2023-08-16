@@ -13,18 +13,10 @@ function ItineraryGenerator(album_id) {
     try {
       setIsLoading(true);
 
-      // get userpreferences from database
-      const userId = localStorage.getItem("user_id");
-      const preferencesResponse = await fetch(
-        `http://127.0.0.1:5000/preference/user/${userId}`
-      );
-      const preferencesData = await preferencesResponse.json();
+      const preferencesResponse = await fetch(`http://127.0.0.1:5000/preference/album/${album_id.album_id}`)
+      const preferencesData = await preferencesResponse.json()
 
-      const userPreferences = [
-        preferencesData.foods,
-        preferencesData.hobbies,
-        preferencesData.other,
-      ];
+      const userPreferences = [preferencesData.foods, preferencesData.hobbies, preferencesData.other]
 
       const { location, startDate, endDate, budget, occasion } = formData;
       setLocation(location);

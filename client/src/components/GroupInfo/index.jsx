@@ -104,7 +104,7 @@ export default function GroupInfo() {
             <ItineraryGenerator album_id={album_id} />
           </div>
           <div>
-            <AiSuggestion />
+            <AiSuggestion album_id={album_id} />
           </div>
         </div>
       </div>

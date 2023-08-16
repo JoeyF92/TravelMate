@@ -72,7 +72,7 @@ export default function UserProfileCard() {
       </div>
 
           <div className="profile-detail">
-            <label className="block text-lg font-primary">
+            <label className="block text-lg font-primary" data-testid="full-name-element">
               Full Name:
             </label>
             <p>{user.first_name} {user.last_name}</p>
@@ -84,6 +84,7 @@ export default function UserProfileCard() {
             </label>
             <p>{user.email}</p>
           </div>
+          <p>Full</p>
         </div>
     )
 }
