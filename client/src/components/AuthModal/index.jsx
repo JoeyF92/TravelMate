@@ -147,6 +147,7 @@ export default function AuthModal({ buttonLabel, showPlaneIcon }) {
                                   required 
                                   value={loginForm.username}
                                   className="block w-full rounded-md border-0 py-1.5 pl-2 text-gray-900 shadow-sm"
+                                  data-testid='username-input'
                                 />
                             </div>
                         </div>

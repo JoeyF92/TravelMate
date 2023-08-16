@@ -7,7 +7,7 @@ import image from '../../assets/Logo-globe.png';
 
 const locationAPIKey= 'ad004eba91bf4aa08c9f2c595db5c012';
 
-export default function AiSuggestion() {
+export default function AiSuggestion(album_id) {
 
     const [currentLocation, setCurrentLocation] = useState('');
     const [show, setShow] = useState(false);
@@ -86,10 +86,8 @@ export default function AiSuggestion() {
         try {
           setIsLoading(true);
 
-          const userId = localStorage.getItem('user_id')
-          const preferencesResponse = await fetch(`http://127.0.0.1:5000/preference/user/${userId}`)
+          const preferencesResponse = await fetch(`http://127.0.0.1:5000/preference/album/${album_id.album_id}`)
           const preferencesData = await preferencesResponse.json()
-
 
           const userPreferences = [preferencesData.foods]
     
@@ -146,7 +144,7 @@ export default function AiSuggestion() {
 
   return (
     <div>
-        <button className='AI-suggestion-button' onClick={handleClick}>AI food finder</button>
+        <button className='AI-suggestion-button' onClick={handleClick} data-testid="AI-button">AI food finder</button>
         <Modal
         className='fade-in'
         show={show}
@@ -167,8 +165,9 @@ export default function AiSuggestion() {
               onChange={(e) => setCurrentLocation(e.target.value)}
               className="location-input block w-full rounded-md border-0 py-1.5 pl-2 text-gray-900 shadow-sm"
               value={currentLocation}
+              data-testid='location-input'
             />
-            <button className="use-my-location-button flex w-14. justify-center items-center rounded-md bg-theme-blue px-3 py-1.5 text-sm font-primary leading-6 text-white shadow-sm hover:opacity-75" onClick={getLocation} title="Use my current location">
+            <button className="use-my-location-button flex w-14. justify-center items-center rounded-md bg-theme-blue px-3 py-1.5 text-sm font-primary leading-6 text-white shadow-sm hover:opacity-75" onClick={getLocation} title="Use my current location" data-testid='get-location-button'>
                 {locationLoading? 'loading...': <FontAwesomeIcon icon={faLocationCrosshairs} size='xl' />}
         </button>
           </div>
@@ -182,7 +181,7 @@ export default function AiSuggestion() {
               
             />
 
-          <button className=" mt-4 mb-4 flex w-full justify-center rounded-md bg-theme-blue px-3 py-1.5 text-sm font-primary leading-6 text-white shadow-sm hover:opacity-75" onClick={findFood}>
+          <button className=" mt-4 mb-4 flex w-full justify-center rounded-md bg-theme-blue px-3 py-1.5 text-sm font-primary leading-6 text-white shadow-sm hover:opacity-75" onClick={findFood} data-testid='find-food'>
             {isLoading? 'Finding food near you...' : 'Find me food'}</button>
         </div>
 
