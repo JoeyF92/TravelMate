@@ -75,7 +75,7 @@ function ItineraryForm({ onSubmit, isLoading, showItineraryForm, setShowItinerar
 
     <section className="mt-2 sm:mx-auto sm:w-full sm:max-w-sm">
       <form className="space-y-2"> 
-        <label htmlFor="start-date" className="block text-sm font-primary leading-6 text-gray-900">Start date</label>
+        <label htmlFor="start-date" className="block text-sm font-primary leading-6 text-gray-900">Start date:</label>
         <DateSelection selected={startDate} onChange={date => setStartDate(date)} />
         <label htmlFor="end-date" className="block text-sm font-primary leading-6 text-gray-900">End date:</label>
         <DateSelection selected={endDate} onChange={date => setEndDate(date)} />
