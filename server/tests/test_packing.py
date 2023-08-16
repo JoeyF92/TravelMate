@@ -34,6 +34,29 @@ def test_create_packing_list(client):
     assert packing_list.items == 'clothing'
     assert packing_list.item_status is False
 
+# def test_delete_item(client):
+#     # Create a new PackingList for testing
+#     packing_list = PackingList(name='Test Packing List')
+#     db.session.add(packing_list)
+#     db.session.commit()
+
+#     # Send a DELETE request to delete the PackingList
+#     response = client.delete(f'/packing/1')
+    
+#     # Check the response
+#     assert response.status_code == 200
+#     assert response.json == {'message': 'Packing list deleted successfully'}
+
+#     # Verify that the PackingList has been deleted from the database
+#     deleted_packing_list = PackingList.query.get(packing_list.id)
+#     assert deleted_packing_list is None
+
+#     # Clean up - no need to delete the PackingList, as it's already deleted
+
+
+
+
+
 def test_delete_item(client):
     # Create a test packing list item
     
