@@ -65,7 +65,7 @@ function ItineraryForm({ onSubmit, isLoading, showItineraryForm, setShowItinerar
     <Modal.Body className='registrationModal'>
     <div className="flex min-h-full flex-col justify-center px-6 py-12 lg:px-8">
             <div className="sm:mx-auto sm:w-full sm:max-w-sm">
-              <h2 className="text-center text-2xl font-primary">
+              <h2 className="text-center text-2xl font-primary mb-4">
                 Generate Your Itinerary
               </h2>
               <p><strong>{typingMessage}</strong></p>
@@ -87,7 +87,7 @@ function ItineraryForm({ onSubmit, isLoading, showItineraryForm, setShowItinerar
               type="text"
               value={location}
               onChange={(e) => setLocation(e.target.value)}
-              className="block w-full rounded-md border-0 py-1.5 pl-2 text-gray-900 shadow-sm"
+              className="block w-full rounded-md border-0 py-1.5 pl-2 text-gray-900 outline-none shadow-sm"
               placeholder='required'
             />
           </div>
@@ -100,7 +100,7 @@ function ItineraryForm({ onSubmit, isLoading, showItineraryForm, setShowItinerar
               type="number"
               value={budget}
               onChange={(e) => setBudget(e.target.value)}
-              className="block w-full rounded-md border-0 py-1.5 pl-2 text-gray-900 shadow-sm"
+              className="block w-full rounded-md border-0 py-1.5 pl-2 text-gray-900 outline-none shadow-sm"
               placeholder='optional'
             />
           </div>
@@ -113,7 +113,7 @@ function ItineraryForm({ onSubmit, isLoading, showItineraryForm, setShowItinerar
               type="text"
               value={occasion}
               onChange={(e) => setOccasion(e.target.value)}
-              className="block w-full rounded-md border-0 py-1.5 pl-2 text-gray-900 shadow-sm"
+              className="block w-full rounded-md border-0 py-1.5 pl-2 text-gray-900 outline-none shadow-sm mb-10"
               placeholder='optional'
             />
           </div>

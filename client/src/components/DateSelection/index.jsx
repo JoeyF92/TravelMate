@@ -10,7 +10,7 @@ const DateSelection = ({ selected, onChange }) => {
         selected={selected}
         onChange={onChange}
         dateFormat="dd/MM/yyyy"
-        className="block w-full rounded-md border-0 py-1.5 pl-2 text-gray-900 shadow-sm"
+        className="block w-full rounded-md border-0 py-1.5 pl-2 text-gray-900 outline-none shadow-sm"
         wrapperClassName="block w-full rounded-md border-0 py-1.5 pl-2 text-gray-900 shadow-sm"
       />
     </div>
