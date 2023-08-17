@@ -52,17 +52,19 @@ export default function ShowGallery() {
 
   return (
     <>
-      <ImageCarousel user_id={user_id} />
-
-      <div id="middle">
+      <div id="group-gallery-top">
+        <ImageCarousel user_id={user_id} />
+      </div>
+      <div id="group-gallery-middle">
         <div id="create-group-all">
           <div id="create-group-left">
             <h2>
-              {" "}
-              <span className="emoji" role="img" aria-label="Plane">
-                ✈️
-              </span>{" "}
-              Begin Your New Adventure{" "}
+              <span className="emoji-wrapper">
+                <span className="emoji" role="img" aria-label="Plane">
+                  ✈️
+                </span>
+              </span>
+              <span className="h2-gallery"> Begin Your New Adventure</span>
             </h2>
             <p>
               Experience the joy of collaborative travel planning. Create a
@@ -70,10 +72,12 @@ export default function ShowGallery() {
               to life.
             </p>
             <h2>
-              <span className="emoji" role="img" aria-label="Knife and Fork">
-                🍴
-              </span>{" "}
-              Dine Like Locals
+              <span className="emoji-wrapper">
+                <span className="emoji" role="img" aria-label="Knife and Fork">
+                  🍴
+                </span>
+              </span>
+              <span className="h2-gallery"> Dine Like Locals</span>
             </h2>
             <p>
               Finding the perfect restaurant has never been easier. Let our AI
@@ -81,22 +85,25 @@ export default function ShowGallery() {
               bud is satisfied.
             </p>
             <h2>
-              <span role="img" aria-label="Camera Flash">
-                📸
-              </span>{" "}
-              Capture Every Moment
+              <span className="emoji-wrapper">
+                <span className="emoji" role="img" aria-label="Camera Flash">
+                  📸
+                </span>
+              </span>
+              <span className="h2-gallery"> Capture Every Moment</span>
             </h2>
             <p>
               Cherish the moments that matter. Share photos, videos, and stories
               from your trip within your group, creating a digital memory lane
               you'll all treasure forever.
             </p>
-
             <h2>
-              <span className="emoji" role="img" aria-label="Tick Box">
-                ✅
-              </span>{" "}
-              Your Itinerary Your Way
+              <span className="emoji-wrapper">
+                <span className="emoji" role="img" aria-label="Tick Box">
+                  ✅
+                </span>
+              </span>
+              <span className="h2-gallery"> Your Itinerary Your Way</span>
             </h2>
             <p>
               Tailor your itinerary to suit everyone's interests. Our AI crafts
@@ -121,9 +128,15 @@ export default function ShowGallery() {
       <div id="all-groups">
         <div id="all-groups-heading">
           {groups.length === 0 ? (
-            <h3> Plan Your Upcoming Trips + Relive Past Memories: </h3>
+            <h3 className="h3-gallery">
+              {" "}
+              Plan Your Upcoming Trips + Relive Past Memories:{" "}
+            </h3>
           ) : (
-            <h3> View Your Upcoming Trips + Relive Past Memories: </h3>
+            <h3 className="h3-gallery">
+              {" "}
+              View Your Upcoming Trips + Relive Past Memories:{" "}
+            </h3>
           )}
         </div>
         <div id="all-groups-inner">

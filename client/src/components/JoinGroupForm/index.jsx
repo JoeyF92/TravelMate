@@ -68,7 +68,7 @@ export default function JoinGroupForm() {
           onChange={handleJoinCodeChange}
         />
 
-        <button className="join-button" type="submit">
+        <button className="join-button" type="submit" data-testid='join-group-button'>
           Submit
         </button>
       </form>

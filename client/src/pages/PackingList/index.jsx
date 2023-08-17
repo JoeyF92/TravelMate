@@ -96,7 +96,7 @@ export default function PackingList() {
                   {item.items}
                 </span>
                 <button className="trash-btn" onClick={() => deleteItem(item)}>
-                  <FontAwesomeIcon icon={faTrash} style={{color: "#d11a2a",}} />
+                  <FontAwesomeIcon icon={faTrash} style={{color: "#4682A9",}}  />
                 </button>
             </li>
           ))}
