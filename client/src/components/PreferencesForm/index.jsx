@@ -129,7 +129,7 @@ export default function PreferencesForm() {
                         ></textarea>
                     </div>
 
-                    <button className={editMode ? 'button-save' : 'button-edit'} type="button" onClick={editMode ? handleSaveClick : handleEditClick}>
+                    <button className={editMode ? 'button-save' : 'button-edit'} type="button" onClick={editMode ? handleSaveClick : handleEditClick} data-testid='edit-button'>
                     {editMode ? 'Save' : <FontAwesomeIcon icon={faEdit} style={{ color: "#4682A9" }} />}
                     </button>
                 </form>

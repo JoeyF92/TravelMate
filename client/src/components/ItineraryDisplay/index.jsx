@@ -215,7 +215,7 @@ function ItineraryDisplay({ isLoading, itinerary, setItinerary, showItinerary, s
 
       <Modal.Header className='registrationModal modal-borders'>
         <h1 className='itinerary-header'>My Itinerary</h1>
-        <p className='AI-message'><strong>{isLoading? null: typingMessage}</strong></p>
+        <p className='AI-message' data-testid="ai-message"><strong>{isLoading? null: typingMessage}</strong></p>
       </Modal.Header>
 
         <Modal.Body className='registrationModal'>

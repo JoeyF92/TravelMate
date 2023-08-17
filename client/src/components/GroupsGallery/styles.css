@@ -1,3 +1,8 @@
+#group-gallery-top {
+  height: 34vw;
+  background-color: #f6f4eb;
+}
+
 #all-groups {
   width: 100vw;
   margin-top: 5rem;
@@ -16,8 +21,22 @@
   flex-wrap: wrap;
 }
 
+.emoji-wrapper {
+  display: inline-block;
+  width: 2rem; /* Adjust as needed for desired alignment */
+  vertical-align: middle;
+}
+
 .emoji {
-  font-size: 1.3rem;
+  font-size: 1.5rem; /* Adjust as needed for emoji size */
+  display: inline-block;
+  line-height: 1;
+}
+
+.h2-gallery,
+.h3-gallery {
+  vertical-align: middle;
+  font-weight: 600;
 }
 
 .group-link {
@@ -50,17 +69,19 @@
 #create-group-all {
   width: 85%;
   margin: auto;
-  margin-top: 6rem;
+
+  /* margin-top: 6rem; */
   display: flex;
 }
 
 #create-group-left {
   width: 60%;
   border-radius: 2.5%;
-  background-color: #f8e3ca;
-  padding: 1rem;
+  background-color: #f3eedb;
+
+  padding: 2rem;
   height: auto;
-  max-height: 45rem;
+  max-height: 39rem;
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
 }
 

@@ -2,14 +2,14 @@
   display: flex;
   flex-direction: column;
   align-items: center;
-  width: 85%;
+  width: 100%;
   margin: auto;
   margin-top: 2rem;
 }
 
 .join-group-form {
   width: 85%;
-  background-color: #f8e3ca;
+  background-color: #f3eedb;
   padding: 20px;
   border-radius: 8px;
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
@@ -19,7 +19,7 @@
 
 .join-label {
   display: block;
-  font-weight: bold;
+  /* font-weight: bold; */
   margin-bottom: 6px;
   font-size: 1.2rem;
 }
