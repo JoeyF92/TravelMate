@@ -66,12 +66,31 @@ def get_user_by_id(user_id):
 # @app.route('/user/<user_id>', methods =['PATCH'])
 def update_user(user_id):
     from application.models.models import User
-    user= User.query.filter_by(user_id=user_id)
-    data = request.json
-    user.update(dict(first_name=data['first_name'],last_name= data['last_name'], email= data['email'], username= data['username'],password= data['password']))
-    db.session.commit()
-    updatedUser= user.first()
-    return jsonify({'message':'User updated!'})
+    data = request.get_json()
+    user = db.session.get(User, id)
+
+    if 'first_name' in data:
+        user.title = data['first_name']
+    if 'last_name' in data:
+        user.location = data['last_name']
+    if 'email' in data:
+        user.description = data['email']
+    if 'username' in data:
+        user.members = data['username']
+    if 'password' in data:
+        user.start_date = data['password']
+    if 'profile_pic' in data:
+        user.end_date = data['profile_pic']
+    
+    # db.session.commit()
+    # db.session.close()
+    # from application.models.models import User
+    # user= User.query.filter_by(user_id=user_id)
+    # data = request.json
+    # user.update(dict(first_name=data['first_name'],last_name= data['last_name'], email= data['email'], username= data['username'],password= data['password']))
+    # db.session.commit()
+    # updatedUser= user.first()
+    return jsonify({'message':'User updated!'}), 200
 
 def get_by_username(username):
     from application.models.models import User
