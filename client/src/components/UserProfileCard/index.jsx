@@ -103,17 +103,21 @@ export default function UserProfileCard() {
         <p className="username">{user.username}</p>
       </div>
 
-      <div className="profile-detail">
-        <label className="block text-lg font-primary">Full Name:</label>
-        <p>
-          {user.first_name} {user.last_name}
-        </p>
-      </div>
+          <div className="profile-detail">
+            <label className="block text-lg font-primary" data-testid="full-name-element">
+              Full Name:
+            </label>
+            <p>{user.first_name} {user.last_name}</p>
+          </div>
+          
+          <div className="profile-detail">
+            <label className="block text-lg font-primary">
+              Email:
+            </label>
+            <p>{user.email}</p>
+          </div>
+          <p>Full</p>
+        </div>
+    )
 
-      <div className="profile-detail">
-        <label className="block text-lg font-primary">Email:</label>
-        <p>{user.email}</p>
-      </div>
-    </div>
-  );
 }

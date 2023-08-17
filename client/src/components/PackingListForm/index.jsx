@@ -8,6 +8,10 @@ export default function PackingListForm({ userId, setList, list }) {
     const [inputText, setInputText] = useState('');
     
     async function addPackingItem(text) {
+      if (text.trim() === '') {
+        return;
+      }
+
       try {
         const response = await axios.post(`${config.baseUrl}/packing/add`, {
           user_id: userId, 
@@ -32,7 +36,7 @@ export default function PackingListForm({ userId, setList, list }) {
     }
             
       return (
-        <form className="input-form" onSubmit={(e) => { e.preventDefault(); addPackingItem(inputText); }}>
+        <form className="input-form" onSubmit={(e) => { e.preventDefault(); addPackingItem(inputText); }} data-testid='packing-form'>
           <div className="packing-item-input">
             <input value={inputText} type="text" className="item-input" placeholder="e.g. Passport" onChange={e => setInputText(e.target.value)} />
             <button type="submit" className="input-item-button"><FontAwesomeIcon icon={faPlus} style={{color: "#ffffff",}} /></button>
