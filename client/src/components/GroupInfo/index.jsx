@@ -123,7 +123,7 @@ export default function GroupInfo() {
         {groupInfo ? (
           <div className="group-info-section-left">
             <div className="group-info-section-photo">
-              <img src={groupInfo.cover_photo}></img>
+              <img src={groupInfo.cover_photo} alt="Group Cover"></img>
             </div>
             <div className="group-info-section-left-content">
               <div>
@@ -134,7 +134,6 @@ export default function GroupInfo() {
                   )}
                 </h1>
                 {groupInfo.description && <p>{groupInfo.description}</p>}
-                {/* {groupInfo.members && <p>Members: {groupInfo.members}</p>} */}
                 {groupInfo.start_date && groupInfo.end_date && (
                   <p>
                     {formatDate(new Date(groupInfo.start_date))} -{" "}
@@ -153,7 +152,6 @@ export default function GroupInfo() {
                         📋Copy
                       </button>
                     </p>
-
                     {isCodeCopied && <p>Code copied to clipboard!</p>}
                   </div>
                 )}
@@ -191,18 +189,44 @@ export default function GroupInfo() {
           {groupContent.map((entry) => (
             <div key={entry.id} className="memory-div">
               {entry.photo && (
-                <div>
+                <div className="memory-item">
                   <img
                     src={entry.photo}
                     alt={`Photo of ${entry.description}`}
                   />
-                  {/* {entry.content && (
-                    <p className="memory-image-content">{entry.content}</p>
-                  )} */}
+                  {entry.description && (
+                    <div className="image-overlay">
+                      <div
+                        className="close-button"
+                        onClick={() => closeMemory(entry.id)}
+                      >
+                        X
+                      </div>
+                      <p className="memory-description">{entry.description}</p>
+                    </div>
+                  )}
                 </div>
               )}
               {!entry.photo && entry.description && (
-                <p className="memory-text-content">{entry.description}</p>
+                <div className="memory-item">
+                  <div
+                    className="close-button"
+                    onClick={() => closeMemory(entry.id)}
+                  >
+                    X
+                  </div>
+                  <p className="memory-text-content">{entry.description}</p>
+                  {entry.description && (
+                    <div className="image-overlay">
+                      <div
+                        className="close-button"
+                        onClick={() => closeMemory(entry.id)}
+                      >
+                        X
+                      </div>
+                    </div>
+                  )}
+                </div>
               )}
             </div>
           ))}
