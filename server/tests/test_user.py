@@ -4,7 +4,7 @@ from flask import g
 from application.models.models import User
 
 def test_register(client):
-    # Prepare test data
+
     user_data = {
         'first_name': 'John',
         'last_name': 'Doe',
@@ -13,23 +13,17 @@ def test_register(client):
         'password': 'password'
     }
 
-    # Make a request to the endpoint
     response = client.post('/user/register', json=user_data)
     assert response.status_code == 201
 
-    # Check if the user is registered in the database
     registered_user = User.query.filter_by(username=user_data['username']).first()
     assert registered_user is not None
 
-    # Check if the user data matches the expected data
     assert registered_user.first_name == user_data['first_name']
     assert registered_user.last_name == user_data['last_name']
     assert registered_user.email == user_data['email']
     assert registered_user.username == user_data['username']
 
-    # Clean up
-    db.session.delete(registered_user)
-    db.session.commit()
 
 
 def test_get_all_users(client):
@@ -41,7 +35,7 @@ def test_get_user_by_id(client):
  assert response.status_code == 200
 
 def test_get_by_username(client):
-    # Prepare the test data
+    
     user_data = {
         'first_name': 'John',
         'last_name': 'Doe',
@@ -52,18 +46,15 @@ def test_get_by_username(client):
     }
     
     with client.application.app_context():
-        # Create a new user in the test database
+        
         user = User(**user_data)
         db.session.add(user)
         db.session.commit()
 
-        # Make a request to the endpoint
+       
         response = client.get('/user/johndoe')
         assert response.status_code == 200
 
-        # Check the response data
-
-        # Clean up
         db.session.delete(user)
         db.session.commit()
 
