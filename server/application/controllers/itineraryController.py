@@ -45,7 +45,7 @@ def delete_itinerary(album_id):
 
     db.session.delete(itinerary)
     db.session.commit()
-    return jsonify({"message": "Itinerary deleted successfully"})
+    return jsonify({"message": "Itinerary deleted successfully"}), 204
 
 def get_itinerary(album_id):
     from application.models.models import Itinerary
