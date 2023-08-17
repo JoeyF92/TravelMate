@@ -3,7 +3,7 @@ from flask import Blueprint
 from application.controllers.userController import *
 
 user_routes = Blueprint("user_routes", __name__)
-
+#
 @user_routes.route('/register', methods=['POST'])
 def create_user_route():
     print("Reached the registration route")
@@ -13,7 +13,7 @@ def create_user_route():
 def get_user_route(user_id):
      user = get_user_by_id(user_id)
      return user
-   
+  # 
 @user_routes.route('/users', methods=['GET'])
 def get_all_users_route():
     users=get_all_users()

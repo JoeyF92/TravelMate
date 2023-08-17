@@ -50,7 +50,7 @@ def create_app(env=None):
 
     app.register_blueprint(user_routes, url_prefix="/user")
     app.register_blueprint(album_routes, url_prefix="/album")
-    # app.register_blueprint(bucket_routes, url_prefix="/bucket")
+    app.register_blueprint(bucket_routes, url_prefix="/bucket")
     app.register_blueprint(content_routes, url_prefix="/content")
     app.register_blueprint(itinerary_routes, url_prefix="/itinerary")
     app.register_blueprint(packing_routes, url_prefix="/packing")
