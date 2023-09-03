@@ -1,12 +1,13 @@
 import React from 'react';
 import image from '../../assets/Logo-globe.png';
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import Modal from 'react-bootstrap/Modal';
 
-function ItineraryDisplay({ isLoading, itinerary, setItinerary, showItinerary, setShowItinerary, location }) {
+function ItineraryDisplay({ isLoading, itinerary, setItinerary, showItinerary, setShowItinerary, location, album_id }) {
     const [newActivity, setNewActivity] = useState('');
     const [addingActivityForDay, setAddingActivityForDay] = useState(null);
     const [generatingActivityForDay, setGeneratingActivityForDay] = useState({});
+    const [typingMessage, setTypingMessage] = useState('')
 
     const handleClose = () => setShowItinerary(false);
 
@@ -116,11 +117,11 @@ function ItineraryDisplay({ isLoading, itinerary, setItinerary, showItinerary, s
     }
 
     const handleSaveItinerary = async () => {
-        const album_id = 1; // Placeholder, need dynamic album_id
     
         try {
+            
             // Check itinerary exists before attempting to delete
-            const checkResponse = await fetch(`http://127.0.0.1:5000/itinerary/${album_id}`);
+            const checkResponse = await fetch(`http://127.0.0.1:5000/itinerary/${album_id.album_id}`);
             
             if (checkResponse.status === 404) {
                 // save the new itinerary directly
@@ -129,7 +130,7 @@ function ItineraryDisplay({ isLoading, itinerary, setItinerary, showItinerary, s
                     headers: {
                         'Content-Type': 'application/json',
                     },
-                    body: JSON.stringify({ album_id: album_id, itinerary: itinerary }),
+                    body: JSON.stringify({ album_id: album_id.album_id, itinerary: itinerary }),
                 });
     
                 if (saveResponse.ok) {
@@ -139,7 +140,7 @@ function ItineraryDisplay({ isLoading, itinerary, setItinerary, showItinerary, s
                 }
             } else if (checkResponse.ok) {
                 // Delete existing itinerary if exists
-                const deleteResponse = await fetch(`http://127.0.0.1:5000/itinerary/delete_itinerary/${album_id}`, {
+                const deleteResponse = await fetch(`http://127.0.0.1:5000/itinerary/delete_itinerary/${album_id.album_id}`, {
                     method: 'DELETE'
                 });
     
@@ -150,7 +151,7 @@ function ItineraryDisplay({ isLoading, itinerary, setItinerary, showItinerary, s
                         headers: {
                             'Content-Type': 'application/json',
                         },
-                        body: JSON.stringify({ album_id: album_id, itinerary: itinerary }),
+                        body: JSON.stringify({ album_id: album_id.album_id, itinerary: itinerary }),
                     });
     
                     if (saveResponse.ok) {
@@ -171,17 +172,34 @@ function ItineraryDisplay({ isLoading, itinerary, setItinerary, showItinerary, s
     
 
     const handleDeleteItinerary = async () => {
-        const album_id = 1 //need dynamic album id
-        const response = await fetch(`http://127.0.0.1:5000/itinerary/delete_itinerary/1`, {
+        setShowItinerary(false)
+        const response = await fetch(`http://127.0.0.1:5000/itinerary/delete_itinerary/${album_id.album_id}`, {
             method: 'DELETE'
         })
 
         if (response.ok) {
-            setShowItinerary(false)
+            alert('Itinerary successfully deleted')
         } else {
             console.error('Error deleting itinerary')
         }
     }
+
+    useEffect (() => {
+    
+        const introMessage = `Check out this tailored itinerary for ${location}. You can tweak activities, or generate new ideas by hitting the button!`;
+        let currentMessage = '';
+        let currentIndex = 0;
+        const typingInterval = setInterval(() => {
+          if (currentIndex < introMessage.length) {
+            currentMessage += introMessage[currentIndex];
+            setTypingMessage(currentMessage);
+            currentIndex++;
+          } else {
+            clearInterval(typingInterval);
+          }
+        }, 30);
+        return () => clearInterval(typingInterval);
+      }, [isLoading])
 
     return (
         <>
@@ -192,62 +210,79 @@ function ItineraryDisplay({ isLoading, itinerary, setItinerary, showItinerary, s
         aria-labelledby="contained-modal-title-vcenter"
         centered
         keyboard={false}
+        size='lg'
       > 
 
+      <Modal.Header className='registrationModal modal-borders'>
+        <h1 className='itinerary-header'>My Itinerary</h1>
+        <p className='AI-message' data-testid="ai-message"><strong>{isLoading? null: typingMessage}</strong></p>
+      </Modal.Header>
+
         <Modal.Body className='registrationModal'>
-        <div className="itinerary-header">
-            <button className="save-button" onClick={handleSaveItinerary}>Save</button>
-            <button className="delete-button" onClick={handleDeleteItinerary}>Delete</button>
-          </div>
 
         <section className="itinerary-container">
-            {isLoading ? (
-                <img className="loading-icon" src={image} alt="Loading" />
-            ) : (
-                <div className="itinerary">
-                    {(() => {
-                        try {
-                            const parsedItinerary = JSON.parse(itinerary);
-                            return Object.entries(parsedItinerary).map(([day, { title, description }]) => (
-                                <article key={day} className="activity">
-                                    <h2 className="activity-heading">{title}</h2>
-                                    <ul className="activity-description">
-                                        {description.map((activity, index) => (
-                                            <li key={index} onClick={handleDelete(index, day)}>
-                                                {activity}
-                                            </li>
-                                        ))}
-                                    </ul>
-                                    {addingActivityForDay === day ? (
-                                        <div>
-                                           <form onSubmit={(e) => handleSaveActivity(e, day)}>
-                                                <input
-                                                    type="text"
-                                                    value={newActivity}
-                                                    onChange={(e) => setNewActivity(e.target.value)}
-                                                    className="add-activity-input block w-full rounded-md border-0 py-1.5 pl-2 text-gray-900 shadow-sm"
-                                                />
-                                                <button className="save-add-activity" type="submit">Add</button>
-                                                <button className="cancel-add-activity" type="button" onClick={handleCancelActivity}>Cancel</button>
-                                            </form>
-                                        </div>
-                                    ) : (
-                                        <div className='activity-buttons'>
-                                        <button className="add-activity-button" onClick={() => handleAddActivity(day)}>+</button>
-                                        <button className='generate-activity-button' onClick={() => handleGenerateActivity(day)} disabled={generatingActivityForDay[day]}>{generatingActivityForDay[day]? 'Generating...': 'Generate new activity' }</button>
-                                        </div>
-                                    )}
-                                </article>
-                            ));
-                        } catch (error) {
-                            console.error('Error parsing itinerary:', error);
-                            return null;
-                        }
-                    })()}
-                </div>
-            )}
-        </section>
+    {isLoading ? (
+        <img className="loading-icon" src={image} alt="Loading" />
+    ) : (
+        itinerary !== undefined && (
+            <div className="itinerary">
+                {(() => {
+                    try {
+                        const parsedItinerary = JSON.parse(itinerary);
+                        return Object.entries(parsedItinerary).map(([day, { title, description }]) => (
+                            <article key={day} className="activity">
+                                <h2 className="activity-heading">{title}</h2>
+                                <ul className="activity-description">
+                                    {description.map((activity, index) => (
+                                        <li key={index} onClick={handleDelete(index, day)}>
+                                            {activity}
+                                        </li>
+                                    ))}
+                                </ul>
+                                {addingActivityForDay === day ? (
+                                    <div>
+                                        <form onSubmit={(e) => handleSaveActivity(e, day)}>
+                                            <input
+                                                type="text"
+                                                value={newActivity}
+                                                onChange={(e) => setNewActivity(e.target.value)}
+                                                className="add-activity-input block w-full rounded-md border-0 py-1.5 pl-2 text-gray-900 shadow-sm"
+                                            />
+                                            <button className="save-add-activity" type="submit">Add</button>
+                                            <button className="cancel-add-activity" type="button" onClick={handleCancelActivity}>Cancel</button>
+                                        </form>
+                                    </div>
+                                ) : (
+                                    <div className='activity-buttons'>
+                                        <button className="add-activity-button transform-scale" onClick={() => handleAddActivity(day)}>+</button>
+                                        <button className='generate-activity-button transform-scale' onClick={() => handleGenerateActivity(day)} disabled={generatingActivityForDay[day]}>
+                                            {generatingActivityForDay[day] ? 'Generating...' : 'Generate new activity'}
+                                        </button>
+                                    </div>
+                                )}
+                            </article>
+                        ));
+                    } catch (error) {
+                        console.error('Error parsing itinerary:', error);
+                        return null;
+                    }
+                })()}
+            </div>
+        )
+    )}
+</section>
+
         </Modal.Body>
+        <Modal.Footer className='registrationModal modal-borders'>
+        
+            {isLoading? null : 
+            <div className="itinerary-header">
+            <button className="save-itinerary-button" onClick={handleSaveItinerary}>Save</button>
+            <button className="save-itinerary-button" onClick={handleDeleteItinerary}>Delete</button>
+            </div>
+            }
+            
+        </Modal.Footer>
         </Modal>
         </>
     );

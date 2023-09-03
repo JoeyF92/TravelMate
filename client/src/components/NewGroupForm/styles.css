@@ -1,4 +1,4 @@
-.form-container {
+.new-form-container {
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -6,21 +6,23 @@
   margin: auto;
 }
 
-.form-wrapper {
-  width: 85%;
+.new-form-wrapper {
+  width: 100%;
 }
 
-.group-form {
+.new-group-form {
   width: 85%;
+  min-height: 7rem;
+  margin: auto;
   padding: 0;
-  background-color: #f8e3ca;
+  background-color: #f3eedb;
   padding: 20px;
   border-radius: 8px;
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
   position: relative;
 }
 
-.form-group {
+.new-form-group {
   margin-bottom: 20px;
 }
 
@@ -41,47 +43,55 @@
   display: none;
 }
 
-label {
+.new-form-label {
   display: block;
-  font-weight: bold;
+  /* font-weight: bold; */
   margin-bottom: 6px;
+  font-size: 1.2rem;
 }
 
-input[type="text"],
-textarea,
-input[type="file"] {
+.new-form-text-input,
+.new-form-textarea {
   width: 100%;
   padding: 10px;
-  border: 1px solid #ccc;
+  background-color: #fff;
   border-radius: 4px;
   font-size: 16px;
 }
 
-input[type="file"] {
+.new-form-file-input {
+  width: 100%;
   padding: 8px 0;
   cursor: pointer;
+  border: none;
+  background-color: #f3eedb;
 }
 
 .submit-button,
 .create-button {
-  background-color: #007bff;
+  background-color: #4682a9;
   color: #fff;
-  border: none;
-  border-radius: 4px;
   padding: 10px 20px;
-  font-size: 16px;
+  border: none;
+  border-radius: 5px;
+  font-size: 12px;
   cursor: pointer;
   transition: background-color 0.3s ease-in-out;
+  position: absolute;
+  bottom: 0;
+  right: 0;
+  margin: 10px;
 }
 
 .submit-button:hover,
 .create-button:hover,
 .x-button:hover {
-  background-color: #0056b3;
+  background-color: #325b76;
+  transform: scale(1.025);
 }
 
 .x-button {
-  background-color: #007bff;
+  background-color: #4682a9;
   color: #fff;
   border: none;
   border-radius: 4px;
@@ -100,6 +110,12 @@ input[type="file"] {
   display: flex;
   align-items: center;
   gap: 10px;
+  width: 100%;
+}
+
+.new-form-date-picker {
+  width: 100%;
+  height: 2rem;
 }
 
 .react-datepicker {
@@ -111,7 +127,7 @@ input[type="file"] {
 }
 
 .react-datepicker__header {
-  background-color: #007bff;
+  background-color: #4682a9;
   border-radius: 4px 4px 0 0;
   color: #fff;
 }
@@ -126,7 +142,7 @@ input[type="file"] {
 
 .react-datepicker__day--selected,
 .react-datepicker__day--keyboard-selected {
-  background-color: #007bff;
+  background-color: #4682a9;
   color: #fff;
 }
 
@@ -155,13 +171,13 @@ input[type="file"] {
   border-radius: 50%;
   padding: 6px;
   background-color: transparent;
-  color: #007bff;
+  color: #4682a9;
   transition: background-color 0.3s ease-in-out, color 0.3s ease-in-out;
 }
 
 .react-datepicker__navigation--previous:hover,
 .react-datepicker__navigation--next:hover {
-  background-color: #f4f4f4;
+  background-color: #f8e3ca;
 }
 
 .react-datepicker__input-container {

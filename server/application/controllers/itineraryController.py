@@ -1,9 +1,9 @@
-from application import db, app
-from application.models import Itinerary
+from application import db
+# from application.models import Itinerary
 from flask import request, jsonify, render_template, redirect, url_for
-import requests
+import requests, os
 
-OPENAI_API_KEY = app.config['OPENAI_API_KEY']
+OPENAI_API_KEY = os.environ.get("OPENAI_API_KEY")
 
 def generate_itinerary_with_chatgpt(user_input):
     system_message = "You are a helpful travel itinerary assistant."
@@ -30,6 +30,7 @@ def call_chatgpt_api(system_message, user_message):
     return response.json()
 
 def save_itinerary():
+    from application.models.models import Itinerary
     data= request.json
     itinerary_data = data.get('itinerary')
     id= data.get('album_id')
@@ -39,13 +40,15 @@ def save_itinerary():
     return jsonify({"message": "Itinerary saved successfully"}), 200
 
 def delete_itinerary(album_id):
+    from application.models.models import Itinerary
     itinerary = Itinerary.query.filter_by(album_id=album_id).first()
 
     db.session.delete(itinerary)
     db.session.commit()
-    return jsonify({"message": "Itinerary deleted successfully"})
+    return jsonify({"message": "Itinerary deleted successfully"}), 204
 
 def get_itinerary(album_id):
+    from application.models.models import Itinerary
     itinerary = Itinerary.query.filter_by(album_id = album_id).first()
     if itinerary is None:
         return jsonify({'message': 'itinerary not found'}), 404

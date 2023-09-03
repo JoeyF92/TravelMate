@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { DateSelection } from '../../components';
 import Modal from 'react-bootstrap/Modal';
 
@@ -8,8 +8,12 @@ function ItineraryForm({ onSubmit, isLoading, showItineraryForm, setShowItinerar
   const [endDate, setEndDate] = useState(new Date());
   const [budget, setBudget] = useState('');
   const [occasion, setOccasion] = useState('');
+  const [typingMessage, setTypingMessage] = useState('')
 
-  const handleClose = () => setShowItineraryForm(false);
+  const handleClose = () => {
+    setShowItineraryForm(false);
+    setTypingMessage('')
+  }
 
 
   const handleGenerateClick = async (e) => {
@@ -28,6 +32,24 @@ function ItineraryForm({ onSubmit, isLoading, showItineraryForm, setShowItinerar
     await onSubmit({ location, startDate, endDate, budget, occasion });
   };
 
+  useEffect (() => {
+    
+    const introMessage = "Hello! I'm your TravelMate AI. Share your details, and I'll create a customised itinerary just for you!";
+    let currentMessage = '';
+    let currentIndex = 0;
+    const typingInterval = setInterval(() => {
+      if (currentIndex < introMessage.length) {
+        currentMessage += introMessage[currentIndex];
+        setTypingMessage(currentMessage);
+        currentIndex++;
+      } else {
+        clearInterval(typingInterval);
+      }
+    }, 30);
+    return () => clearInterval(typingInterval);
+  }, [showItineraryForm])
+
+
   return (
     <>
 
@@ -43,60 +65,61 @@ function ItineraryForm({ onSubmit, isLoading, showItineraryForm, setShowItinerar
     <Modal.Body className='registrationModal'>
     <div className="flex min-h-full flex-col justify-center px-6 py-12 lg:px-8">
             <div className="sm:mx-auto sm:w-full sm:max-w-sm">
-              <h2 className="text-center text-2xl font-primary">
+              <h2 className="text-center text-2xl font-primary mb-4">
                 Generate Your Itinerary
               </h2>
+              <p><strong>{typingMessage}</strong></p>
             </div>
 
 
 
-    <section className="mt-10 sm:mx-auto sm:w-full sm:max-w-sm">
+    <section className="mt-2 sm:mx-auto sm:w-full sm:max-w-sm">
       <form className="space-y-2"> 
-        <label for="start-date" class="block text-sm font-primary leading-6 text-gray-900">Start date</label>
+        <label htmlFor="start-date" className="block text-sm font-primary leading-6 text-gray-900">Start date:</label>
         <DateSelection selected={startDate} onChange={date => setStartDate(date)} />
-        <label for="end-date" class="block text-sm font-primary leading-6 text-gray-900">End date:</label>
+        <label htmlFor="end-date" className="block text-sm font-primary leading-6 text-gray-900">End date:</label>
         <DateSelection selected={endDate} onChange={date => setEndDate(date)} />
 
         <div>
-          <label for="destination" class="block text-sm font-primary leading-6 text-gray-900">Destination:</label>
+          <label htmlFor="destination" className="block text-sm font-primary leading-6 text-gray-900">Destination:</label>
           <div className="mt-2">
             <input
               type="text"
               value={location}
               onChange={(e) => setLocation(e.target.value)}
-              className="block w-full rounded-md border-0 py-1.5 pl-2 text-gray-900 shadow-sm"
+              className="block w-full rounded-md border-0 py-1.5 pl-2 text-gray-900 outline-none shadow-sm"
               placeholder='required'
             />
           </div>
         </div>
         
         <div>
-          <label for="budget" class="block text-sm font-primary leading-6 text-gray-900">Budget (£):</label>
+          <label htmlFor="budget" className="block text-sm font-primary leading-6 text-gray-900">Budget (£):</label>
           <div className='mt-2'>
             <input
               type="number"
               value={budget}
               onChange={(e) => setBudget(e.target.value)}
-              className="block w-full rounded-md border-0 py-1.5 pl-2 text-gray-900 shadow-sm"
+              className="block w-full rounded-md border-0 py-1.5 pl-2 text-gray-900 outline-none shadow-sm"
               placeholder='optional'
             />
           </div>
         </div>
         
         <div>
-          <label for="occasion" class="block text-sm font-primary leading-6 text-gray-900">Occasion:</label>
+          <label htmlFor="occasion" className="block text-sm font-primary leading-6 text-gray-900">Occasion:</label>
           <div className='mt-2'>
             <input
               type="text"
               value={occasion}
               onChange={(e) => setOccasion(e.target.value)}
-              className="block w-full rounded-md border-0 py-1.5 pl-2 text-gray-900 shadow-sm"
+              className="block w-full rounded-md border-0 py-1.5 pl-2 text-gray-900 outline-none shadow-sm mb-10"
               placeholder='optional'
             />
           </div>
         </div>
 
-        <button className=" mt-10 flex w-full justify-center rounded-md bg-theme-blue px-3 py-1.5 text-sm font-primary leading-6 text-white shadow-sm hover:opacity-75" onClick={handleGenerateClick} disabled={isLoading}>
+        <button className=" mt-10 flex w-full justify-center rounded-md bg-theme-blue px-3 py-1.5 text-sm font-primary leading-6 text-white shadow-sm hover:opacity-75" onClick={handleGenerateClick} disabled={isLoading} data-testid="generate-button">
           {isLoading ? 'Generating your perfect holiday...' : 'Generate Itinerary'}
         </button>
       </form>

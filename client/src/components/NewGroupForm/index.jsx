@@ -111,41 +111,50 @@ export default function NewGroupForm() {
   };
 
   return (
-    <div className="form-container">
-      <div className="form-wrapper">
-        <div className="group-form" ref={formRef}>
+    <div className="new-form-container">
+      <div className="new-form-wrapper">
+        <div className="new-group-form" ref={formRef}>
           {formStatus === "hidden" && (
-            <label id="create-form-title">Create a New Group</label>
+            <label className="new-form-label" id="create-form-title">
+              Start a New Group:
+            </label>
           )}
 
           <button className="create-button" onClick={formDisplayFunction}>
             Create
           </button>
           <form className={"create-form  display-none"} onSubmit={handleSubmit}>
-            <div className="form-group">
-              <label htmlFor="groupName">Group Name:</label>
+            <div className="new-form-group">
+              <label className="new-form-label" htmlFor="groupName">
+                Group Name:
+              </label>
               <input
                 type="text"
+                className="new-form-text-input"
                 id="groupName"
                 name="groupName"
                 value={formData.groupName}
                 onChange={handleInputChange}
               />
             </div>
-            <div className="form-group">
-              <label htmlFor="location">Location:</label>
+            <div className="new-form-group">
+              <label className="new-form-label" htmlFor="location">
+                Location:
+              </label>
               <input
                 type="text"
+                className="new-form-text-input"
                 id="location"
                 name="location"
                 value={formData.location}
                 onChange={handleInputChange}
               />
             </div>
-            <div className="form-group">
-              <label>Date Range:</label>
+            <div className="new-form-group">
+              <label className="new-form-label">Date Range:</label>
               <div className="date-picker-container">
                 <DatePicker
+                  className="new-form-date-picker"
                   selected={formData.startDate}
                   onChange={handleStartDateChange}
                   selectsStart
@@ -156,6 +165,7 @@ export default function NewGroupForm() {
                 />
                 <span>to</span>
                 <DatePicker
+                  className="new-form-date-picker"
                   selected={formData.endDate}
                   onChange={handleEndDateChange}
                   selectsEnd
@@ -167,18 +177,24 @@ export default function NewGroupForm() {
                 />
               </div>
             </div>
-            <div className="form-group">
-              <label htmlFor="description">Description:</label>
+            <div className="new-form-group">
+              <label className="new-form-label" htmlFor="description">
+                Description:
+              </label>
               <textarea
                 id="description"
+                className="new-form-textarea"
                 name="description"
                 value={formData.description}
                 onChange={handleInputChange}
               />
             </div>
-            <div className="form-group">
-              <label htmlFor="image">Image:</label>
+            <div className="new-form-group">
+              <label className="new-form-label" htmlFor="image">
+                Image:
+              </label>
               <input
+                className="new-form-file-input"
                 type="file"
                 id="image"
                 name="image"

@@ -1,7 +1,8 @@
-from application import app, db
+from application import db
 from datetime import datetime
+from flask import current_app
 
-app.app_context().push()
+# app.app_context().push()
 
 class User(db.Model):
     __tablename__ = "user"
@@ -11,6 +12,7 @@ class User(db.Model):
     email = db.Column(db.String(50), nullable=False)
     username = db.Column(db.String(20), nullable=False)
     password = db.Column(db.String(100), nullable=False)
+    profile_pic = db.Column(db.String(250))
     
     token = db.relationship('Token', backref='user')
     preference = db.relationship('Preference', backref='user')
@@ -18,12 +20,13 @@ class User(db.Model):
     packinglist = db.relationship('PackingList', backref='user')
     album = db.relationship('Album', backref='user')
 
-    def __init__(self, first_name, last_name, email, username, password):
+    def __init__(self, first_name, last_name, email, username, password, profile_pic):
         self.first_name = first_name
         self.last_name = last_name
         self.email = email
         self.username = username
         self.password = password
+        self.profile_pic = profile_pic
 
 class Token(db.Model):
     __tablename__ = "token"
@@ -61,29 +64,30 @@ class BucketList(db.Model):
         self.description = description
         self.user_id = user_id
 
+
 class PackingList(db.Model):
     __tablename__ = "packinglist"
     list_id = db.Column(db.Integer, primary_key=True)
-    destination = db.Column(db.String(100), nullable=False)
     items = db.Column(db.String(20), nullable=False)
+    item_status = db.Column(db.Boolean, nullable=False, default=False)
     user_id = db.Column(db.Integer, db.ForeignKey("user.user_id"))
-
-    def __init__(self, destination, items, user_id):
-        self.destination = destination
+    
+    def __init__(self, items, user_id, item_status=False):
         self.items = items
+        self.item_status = item_status
         self.user_id = user_id
 
 class Album(db.Model):
     __tablename__ = "album"
     album_id = db.Column(db.Integer, primary_key=True)
-    title = db.Column(db.String(50), nullable=False)
-    location = db.Column(db.String(20), nullable=False)
-    description = db.Column(db.String(100), nullable=False)
+    title = db.Column(db.String(100), nullable=False)
+    location = db.Column(db.String(50), nullable=False)
+    description = db.Column(db.String(200), nullable=False)
     members = db.Column(db.String(50))
     start_date = db.Column(db.DateTime, nullable=False)
     end_date = db.Column(db.DateTime, nullable=False)
     share_code = db.Column(db.Integer, nullable=False)
-    cover_photo = db.Column(db.String(200))
+    cover_photo = db.Column(db.String(250))
     user_id = db.Column(db.Integer, db.ForeignKey("user.user_id"))
     
     content = db.relationship('Content', backref='album')
@@ -103,8 +107,8 @@ class Album(db.Model):
 class Content(db.Model):
     __tablename__ = "content"
     content_id = db.Column(db.Integer, primary_key=True)
-    photo = db.Column(db.String(200))
-    description = db.Column(db.String(200))
+    photo = db.Column(db.String(250))
+    description = db.Column(db.String(250))
     tags = db.Column(db.String(50))
     album_id = db.Column(db.Integer, db.ForeignKey("album.album_id"))
 

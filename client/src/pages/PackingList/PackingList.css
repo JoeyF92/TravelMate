@@ -1,0 +1,139 @@
+.packing-title {
+    font-size: 2rem;
+    font-family: "poppins", sans-serif;
+    min-height: 15vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.packing-item-input {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.packing-item-input input:focus {
+    outline: none; 
+  }
+
+.item-input {
+    font-size: 25px;
+    height: 44px;
+    padding-left: 10px;
+    border-radius: 5px 0 0 5px;
+    font-family: "poppins", sans-serif;
+}
+
+.input-item-button {
+    background-color: #4682A9;
+    color: white;
+    padding: 10px 20px;
+    border: none;
+    font-size: 16px;
+    cursor: pointer;
+    border-radius: 0 5px 5px 0;
+    transition: transform .4s;
+}
+
+.input-item-button:hover {
+    opacity: 0.75;
+}
+
+.packingItem-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.packingItem-list {
+    list-style: none;
+    font-family: "poppins", sans-serif;
+    margin-top: 20px;
+    padding: 10px;
+}
+
+.item-info {
+    margin: 30px;
+    font-size: 1.5rem;
+    color: black;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-radius: 5px;
+}
+
+.item {
+    flex: 1;
+    padding: 0 50px 0 20px;
+}
+
+.trash-btn {
+    border: none;
+    padding: 0 1rem;
+    cursor: pointer;
+    font-size: 25px;
+}
+
+.trash-btn:hover {
+    opacity: 0.75;
+}
+
+.complete-btn {
+    background-color: #33b249;
+    color: white;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    font-size: 16px;
+    cursor: pointer;
+    transition: transform .4s;
+}
+
+.packingItem-list .item-info .item {
+  display: inline-block;
+  margin-right: 8px;
+  position: relative;
+}
+
+.packingItem-list .item-info .item.completed {
+  text-decoration: line-through;
+  opacity: 0.3;
+}
+
+.packingItem-list .item-info input[type="checkbox"] {
+    appearance: none;
+    -webkit-appearance: none;
+    border: 2px solid #ccc;
+    border-radius: 4px;
+    background-color: white;
+    cursor: pointer;
+    transition: background-color 0.2s, border-color 0.2s;
+}
+
+.packingItem-list .item-info input[type="checkbox"]:checked {
+    background-color: #1dd1a1;
+    border-color: #1dd1a1; 
+}
+
+.packingItem-list .item-info input[type="checkbox"]::before {
+    content: "\2714";
+    font-family: Arial, sans-serif;
+    font-size: 18px;
+    color: transparent;
+    display: block;
+    width: 24px;
+    height: 24px;
+    background-color: transparent;
+    border-radius: 4px;
+    transition: background-color 0.2s, color 0.2s;
+    text-align: center;
+    line-height: 24px;
+}
+  
+.packingItem-list .item-info input[type="checkbox"]:checked::before {
+    color: white;
+    background-color: #1dd1a1;
+}
+  
+

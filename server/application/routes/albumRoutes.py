@@ -1,6 +1,6 @@
-from application import app, db
+# from application import db
 from flask import Blueprint
-from application.controllers.albumController import *
+from application.controllers.albumController import index_album, create, index_albums_by_user, index_album_by_id, update_album, destroy_album, index_album_by_code
 
 album_routes = Blueprint("album_routes", __name__)
 
@@ -33,3 +33,9 @@ def update_album_by_id(album_id):
 @album_routes.route("/<int:album_id>", methods=["DELETE"])
 def destroy_album_by_id(album_id):
     return destroy_album(album_id)
+
+#Get album by share code
+@album_routes.route("/code/<int:share_code>")
+def get_album_by_code(share_code):
+    return index_album_by_code(share_code)
+
